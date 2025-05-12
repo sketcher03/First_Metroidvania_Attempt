@@ -1,0 +1,123 @@
+extends CharacterBody2D
+
+@onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var state_machine: Node2D = $StateMachine
+@onready var raycast_jump_finish_right: RayCast2D = $RayCasts/raycast_jump_finish_right
+@onready var raycast_jump_finish_left: RayCast2D = $RayCasts/raycast_jump_finish_left
+@onready var progress_bar: ProgressBar = $ProgressBar
+@onready var attack_area: Area2D = $"Attack Area"
+
+@export var health = 100
+@export var running_speed = 150
+@export var jump_power = -300
+@export var double_jump_power = -300
+@export var player_damage = 10
+
+var direction: Vector2 = Vector2.ZERO
+
+# State switching helper variables
+var idle: bool = false
+var running: bool = false
+var jump_starter: bool = false
+var jump_finisher: bool = false
+var player_fell: bool = false
+var can_attack: bool = false
+var can_combo_attack: bool = false
+var can_air_jump: bool = false
+var is_dead: bool = false
+
+func _physics_process(delta: float) -> void:
+	progress_bar.value = health
+	
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+	
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = jump_power
+	
+	direction = Vector2(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), 0)
+	
+	if direction.x != 0 and state_machine.check_if_can_move():
+		velocity.x = direction.x * running_speed
+	else:
+		velocity.x = move_toward(velocity.x, 0, running_speed)
+	
+	move_and_slide()
+	player_position_check()
+	state_switch()
+	Global.update_player_position(global_position)
+
+func player_position_check():
+	if direction.x > 0:
+		sprite_2d.flip_h = false
+		attack_area.scale.x = 1
+	elif direction.x < 0:
+		sprite_2d.flip_h = true
+		attack_area.scale.x = -1
+
+func state_switch():
+	if Input.is_action_just_pressed("jump") and state_machine.check_can_air_jump():
+		can_air_jump = true
+		velocity.y = double_jump_power
+	#elif Input.is_action_just_pressed("attack2") and can_attack:
+		#can_combo_attack
+	elif Input.is_action_just_pressed("attack"):
+		can_attack = true
+	elif direction.x == 0 and is_on_floor():
+		idle = true
+		running = false
+		jump_starter = false
+		jump_finisher = false
+		player_fell = false
+	elif direction.x != 0 and is_on_floor():
+		idle = false
+		running = true
+		jump_starter = false
+		jump_finisher = false
+		player_fell = false
+	elif Input.is_action_just_pressed("jump") and velocity.y < 0:
+		idle = false
+		running = false
+		jump_starter = true
+		jump_finisher = false
+		player_fell = false
+	elif (raycast_jump_finish_right.is_colliding() or raycast_jump_finish_left.is_colliding()) and velocity.y > 0:
+		idle = false
+		running = false
+		jump_starter = false
+		jump_finisher = true
+		player_fell = false
+	elif velocity.y > 0:
+		idle = false
+		running = false
+		jump_starter = false
+		jump_finisher = false
+		player_fell = true
+
+func reset_air_jump():
+	can_air_jump = false
+
+func _on_attack_area_body_entered(body: Node2D) -> void:
+	if body.is_in_group("enemies"):
+		body.take_damage(player_damage)
+
+func heal(healing_amount):
+	if health < 100:
+		health += healing_amount
+		print("Player Health: " + str(health))
+
+func take_damage(enemy_damage):
+	if is_dead:
+		return
+	
+	health -= enemy_damage
+	print("Player Health: " + str(health))
+	
+	if health <= 0:
+		die()
+	else:
+		state_machine.change_state("Hurt State")
+
+func die():
+	is_dead = true
+	state_machine.change_state("Death State")

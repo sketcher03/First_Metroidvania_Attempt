@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cnyh4s6jlc4tg"]
 
 [ext_resource type="Texture2D" uid="uid://du33ipoyhgerq" path="res://assets/Fantasy Swamp Forest/Free/Terrain_and_Props.png" id="1_ew5uy"]
-[ext_resource type="PackedScene" uid="uid://bi8kv4wnfhjet" path="res://player/player.tscn" id="2_63c5o"]
+[ext_resource type="PackedScene" uid="uid://ba83va73u5dfp" path="res://player/warrior.tscn" id="3_63c5o"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vonw3"]
 texture = ExtResource("1_ew5uy")
@@ -557,10 +557,11 @@ sources/0 = SubResource("TileSetAtlasSource_vonw3")
 [node name="Ground" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_oi3di")
 
-[node name="Player" parent="." instance=ExtResource("2_63c5o")]
-position = Vector2(73, -64)
+[node name="Warrior" parent="." instance=ExtResource("3_63c5o")]
+position = Vector2(72, -60)
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
+[node name="Camera2D" type="Camera2D" parent="Warrior"]
 zoom = Vector2(1.5, 1.5)
 limit_left = -48
 limit_bottom = 48
+limit_smoothed = true

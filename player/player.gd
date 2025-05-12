@@ -39,6 +39,8 @@ func _process(delta: float) -> void:
 			damage_dealt.emit(damage_amount, direction)
 
 func _physics_process(delta: float) -> void:
+	Global.update_player_position(global_position)
+	
 	player_falling(delta)
 	player_idle(delta)
 	player_run(delta)
@@ -124,6 +126,9 @@ func input_movement():
 	
 func get_damage_amount() -> int:
 	return damage_amount
+
+func take_damage(damage_taken: int):
+	print("Damage Taken: " + str(damage_taken))
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	if area.name == "Hurtbox":

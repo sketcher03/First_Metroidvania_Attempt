@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://dxhs4vu3g4ro0"]
+
+[ext_resource type="Texture2D" uid="uid://bo2i0qhu5yban" path="res://assets/Objects/heart.png" id="1_dkgu3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ypxm8"]
+atlas = ExtResource("1_dkgu3")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_csr62"]
+atlas = ExtResource("1_dkgu3")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_whejf"]
+atlas = ExtResource("1_dkgu3")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3vf5x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ypxm8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_csr62")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_whejf")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jkyl8"]
+radius = 6.0
+
+[node name="HealingHeart" type="Area2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_3vf5x")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.170002
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_jkyl8")

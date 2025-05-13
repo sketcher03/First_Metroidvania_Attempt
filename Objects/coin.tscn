@@ -1,5 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://cyos254u2x5u5"]
+[gd_scene load_steps=14 format=3 uid="uid://cyos254u2x5u5"]
 
+[ext_resource type="Script" uid="uid://bd2i1vtqjau4m" path="res://Objects/coin.gd" id="1_6bv11"]
 [ext_resource type="Texture2D" uid="uid://bbdh5nfrnit7c" path="res://assets/Objects/coin_gold.png" id="1_sulkx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6bv11"]
@@ -69,7 +70,13 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_cdap4"]
 radius = 6.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_sulkx"]
+radius = 6.0
+
 [node name="Coin" type="Area2D"]
+collision_layer = 16
+collision_mask = 3
+script = ExtResource("1_6bv11")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
@@ -81,3 +88,14 @@ frame_progress = 0.394097
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_cdap4")
+
+[node name="PlayerDetection" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_sulkx")
+debug_color = Color(0.802545, 0.418618, 9.62615e-07, 0.42)
+
+[connection signal="body_entered" from="PlayerDetection" to="." method="_on_player_entered"]

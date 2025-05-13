@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cavrjjlgq4n6l"]
+[gd_scene load_steps=36 format=3 uid="uid://cavrjjlgq4n6l"]
 
 [ext_resource type="Script" uid="uid://d0a8ofyktx4ah" path="res://Mobs/necromancer.gd" id="1_6dim0"]
 [ext_resource type="Texture2D" uid="uid://b7fw82hk34cki" path="res://assets/Mobs/Necromancer/Attack/spr_NecromancerAttackWithEffect_strip47.png" id="1_rrlte"]
@@ -640,6 +640,10 @@ thickness = 6
 color = Color(0.61, 0, 0.101667, 1)
 thickness = 6
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k3e8g"]
+radius = 6.66667
+height = 36.6667
+
 [node name="Necromancer" type="CharacterBody2D" groups=["enemies"]]
 scale = Vector2(1.2, 1.2)
 collision_layer = 4
@@ -674,6 +678,7 @@ collision_mask = 2
 position = Vector2(0, -25)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_rrlte")
+debug_color = Color(0.63, 0.51429, 0.2646, 0.164706)
 
 [node name="RayCasts" type="Node2D" parent="."]
 
@@ -739,6 +744,16 @@ theme_override_styles/background = SubResource("StyleBoxLine_k3e8g")
 theme_override_styles/fill = SubResource("StyleBoxLine_mdu00")
 show_percentage = false
 
+[node name="MeleeArea2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeArea2D"]
+position = Vector2(0, -18.3333)
+shape = SubResource("CapsuleShape2D_k3e8g")
+debug_color = Color(1, 0, 0.15, 0.278431)
+
 [connection signal="body_entered" from="PlayerDetection" to="." method="_on_player_detected"]
 [connection signal="body_exited" from="PlayerDetection" to="." method="_on_player_lost"]
 [connection signal="body_entered" from="AttackArea2D" to="." method="_on_attack_entered"]
+[connection signal="body_entered" from="MeleeArea2D" to="." method="_on_melee_area_entered"]

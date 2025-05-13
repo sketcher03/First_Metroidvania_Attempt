@@ -6,14 +6,18 @@ extends CharacterBody2D
 @onready var raycast_jump_finish_left: RayCast2D = $RayCasts/raycast_jump_finish_left
 @onready var progress_bar: ProgressBar = $ProgressBar
 @onready var attack_area: Area2D = $"Attack Area"
+@onready var heal_effect_player: AnimationPlayer = $Heal_Effect_Player
+
 
 @export var health = 100
 @export var running_speed = 150
 @export var jump_power = -300
 @export var double_jump_power = -300
 @export var player_damage = 10
+@export var knockback_force = Vector2(350, -25)
 
 var direction: Vector2 = Vector2.ZERO
+const MAX_HEALTH = 100
 
 # State switching helper variables
 var idle: bool = false
@@ -51,9 +55,11 @@ func player_position_check():
 	if direction.x > 0:
 		sprite_2d.flip_h = false
 		attack_area.scale.x = 1
+		sprite_2d.position.x = 5
 	elif direction.x < 0:
 		sprite_2d.flip_h = true
 		attack_area.scale.x = -1
+		sprite_2d.position.x = -5
 
 func state_switch():
 	if Input.is_action_just_pressed("jump") and state_machine.check_can_air_jump():
@@ -81,7 +87,7 @@ func state_switch():
 		jump_starter = true
 		jump_finisher = false
 		player_fell = false
-	elif (raycast_jump_finish_right.is_colliding() or raycast_jump_finish_left.is_colliding()) and velocity.y > 0:
+	elif (raycast_jump_finish_right.is_colliding() or raycast_jump_finish_left.is_colliding()) and velocity.y > 0 and not is_on_floor():
 		idle = false
 		running = false
 		jump_starter = false
@@ -102,21 +108,35 @@ func _on_attack_area_body_entered(body: Node2D) -> void:
 		body.take_damage(player_damage)
 
 func heal(healing_amount):
+	heal_effect_player.play("Heal_Timer")
 	if health < 100:
 		health += healing_amount
+		
+		if health >= MAX_HEALTH:
+			health = MAX_HEALTH
+		
+		Global.update_player_health(health, MAX_HEALTH)
 		print("Player Health: " + str(health))
 
-func take_damage(enemy_damage):
+func take_damage(enemy_damage, enemy_position):
 	if is_dead:
 		return
 	
 	health -= enemy_damage
+	Global.update_player_health(health, MAX_HEALTH)
 	print("Player Health: " + str(health))
+	
+	var knockback_direction = (global_position - enemy_position).normalized()
+	apply_knockback(Vector2(knockback_force.x * knockback_direction.x, knockback_force.y))
 	
 	if health <= 0:
 		die()
 	else:
 		state_machine.change_state("Hurt State")
+
+func apply_knockback(force: Vector2):
+	velocity = force
+	move_and_slide()
 
 func die():
 	is_dead = true

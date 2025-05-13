@@ -1,0 +1,193 @@
+[gd_scene load_steps=24 format=3 uid="uid://be2jp43ffd03e"]
+
+[ext_resource type="Script" uid="uid://7tgbujanjasr" path="res://UI/game_screen.gd" id="1_k5pxx"]
+[ext_resource type="Texture2D" uid="uid://c4whmrhoxxobt" path="res://assets/UI/healthbarUnder.png" id="2_tb4gh"]
+[ext_resource type="Texture2D" uid="uid://biq4a0s8s01t4" path="res://assets/UI/healthbarProgress.png" id="3_xw6kl"]
+[ext_resource type="Script" uid="uid://1ktlr1v8xfye" path="res://UI/health_bar.gd" id="4_v3gls"]
+[ext_resource type="Texture2D" uid="uid://bo2i0qhu5yban" path="res://assets/Objects/heart.png" id="5_3hgyf"]
+[ext_resource type="Texture2D" uid="uid://b8hql7swsft75" path="res://assets/UI/inventorySlot.png" id="6_c5q7s"]
+[ext_resource type="Texture2D" uid="uid://bbdh5nfrnit7c" path="res://assets/Objects/coin_gold.png" id="7_ytrf8"]
+[ext_resource type="FontFile" uid="uid://d2qoxyh1atlbi" path="res://assets/UI/Jersey10-Regular.ttf" id="8_m5xfd"]
+[ext_resource type="Texture2D" uid="uid://djit4p1atgdmp" path="res://assets/UI/Pause Normal.png" id="9_v3gls"]
+[ext_resource type="Texture2D" uid="uid://cyyt1xwnvnbcm" path="res://assets/UI/Pause Pressed.png" id="10_3hgyf"]
+[ext_resource type="Texture2D" uid="uid://ds5ypbysgyesx" path="res://assets/UI/Pause Hover.png" id="11_c5q7s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_maq6b"]
+atlas = ExtResource("5_3hgyf")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6w4ab"]
+atlas = ExtResource("5_3hgyf")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n8wy4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_maq6b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6w4ab")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n8wy4"]
+atlas = ExtResource("7_ytrf8")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dx6c5"]
+atlas = ExtResource("7_ytrf8")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5mwf5"]
+atlas = ExtResource("7_ytrf8")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_upde5"]
+atlas = ExtResource("7_ytrf8")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_406qh"]
+atlas = ExtResource("7_ytrf8")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jldy4"]
+atlas = ExtResource("7_ytrf8")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qeex7"]
+atlas = ExtResource("7_ytrf8")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hd0gu"]
+atlas = ExtResource("7_ytrf8")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e78uj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n8wy4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dx6c5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5mwf5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_upde5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_406qh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jldy4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qeex7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hd0gu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="GameScreen" type="CanvasLayer"]
+script = ExtResource("1_k5pxx")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="MarginContainer/VBoxContainer/Control"]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 11.0
+offset_right = 194.0
+offset_bottom = 31.0
+nine_patch_stretch = true
+stretch_margin_left = 4
+stretch_margin_top = 4
+stretch_margin_right = 4
+stretch_margin_bottom = 4
+texture_under = ExtResource("2_tb4gh")
+texture_progress = ExtResource("3_xw6kl")
+tint_progress = Color(0.9, 0, 1, 1)
+script = ExtResource("4_v3gls")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MarginContainer/VBoxContainer/Control"]
+position = Vector2(19, 19)
+scale = Vector2(2.44531, 2.31384)
+sprite_frames = SubResource("SpriteFrames_n8wy4")
+autoplay = "default"
+frame_progress = 0.866395
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(203, 40)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="MarginContainer/VBoxContainer/HBoxContainer/Control"]
+position = Vector2(48, 51)
+scale = Vector2(2.75329, 1.33553)
+texture = ExtResource("6_c5q7s")
+region_enabled = true
+region_rect = Rect2(0, 20.0226, 20, 19.9774)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MarginContainer/VBoxContainer/HBoxContainer/Control"]
+position = Vector2(19, 51)
+scale = Vector2(2.375, 2.375)
+sprite_frames = SubResource("SpriteFrames_e78uj")
+autoplay = "default"
+frame_progress = 0.272877
+
+[node name="Coin_Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Control"]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 37.0
+offset_right = 53.0
+offset_bottom = 65.0
+theme_override_colors/font_color = Color(0.44, 0.088, 0.088, 1)
+theme_override_fonts/font = ExtResource("8_m5xfd")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Control" type="Control" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="PauseTextureButton" type="TextureButton" parent="MarginContainer/Control"]
+layout_mode = 2
+offset_left = 591.0
+offset_top = 6.0
+offset_right = 607.0
+offset_bottom = 22.0
+scale = Vector2(1.5, 1.5)
+size_flags_horizontal = 8
+size_flags_vertical = 0
+texture_normal = ExtResource("9_v3gls")
+texture_pressed = ExtResource("10_3hgyf")
+texture_hover = ExtResource("11_c5q7s")
+texture_focused = ExtResource("10_3hgyf")
+
+[connection signal="pressed" from="MarginContainer/Control/PauseTextureButton" to="." method="_on_pause_button_pressed"]

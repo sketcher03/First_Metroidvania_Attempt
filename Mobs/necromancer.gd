@@ -22,7 +22,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var change_direction: float  = 2.0
 @export var stop_distance: float  = 10.0
 @export var attack_range: float  = 50.0
-@export var damage_dealt: int  = 20
+@export var damage_dealt: int  = 40
 @export var move_speed: int  = 28
 @export var chase_speed: int  = 60
 @export var health: int = 100
@@ -113,7 +113,12 @@ func _on_player_lost(body: Node2D) -> void:
 
 func _on_attack_entered(body: Node2D) -> void:
 	if body.is_in_group("players"):
-		body.take_damage(damage_dealt)
+		body.take_damage(damage_dealt, global_position)
+
+func _on_melee_area_entered(body: Node2D) -> void:
+	# print("Player too close")
+	if body.is_in_group("players"):
+		body.take_damage(damage_dealt * 0.3, global_position)
 
 # indicates when the player is out of attack range
 func reset_attack_state():

@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="Metroidvania v1"
-run/main_scene="uid://cnyh4s6jlc4tg"
+run/main_scene="uid://hi378hlhek60"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Global="*res://Global.gd"
+GameManager="*res://game_manager.gd"
 
 [display]
 
@@ -63,6 +64,8 @@ attack={
 2d_physics/layer_1="GROUND"
 2d_physics/layer_2="PLAYER"
 2d_physics/layer_3="ENEMY"
+2d_physics/layer_4="UTILITY_PICKUPS"
+2d_physics/layer_5="COLLECTIBLES"
 
 [rendering]
 

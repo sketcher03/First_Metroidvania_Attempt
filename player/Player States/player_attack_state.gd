@@ -21,4 +21,8 @@ func transition():
 			get_parent().change_state("Idle State")
 		elif owner.running:
 			get_parent().change_state("Run State")
+		elif owner.jump_starter:
+			get_parent().change_state("Jump Start State")
+		elif owner.jump_finisher:
+			get_parent().change_state("Jump End State")
 		

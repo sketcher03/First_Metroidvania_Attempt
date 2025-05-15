@@ -569,6 +569,6 @@ position = Vector2(72, -60)
 zoom = Vector2(1.5, 1.5)
 limit_left = -48
 limit_bottom = 48
-limit_smoothed = true
 script = ExtResource("7_maq6b")
 player = NodePath("../Warrior")
+smoothing_enabled = true

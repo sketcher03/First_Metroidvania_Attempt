@@ -29,6 +29,7 @@ var can_attack: bool = false
 var can_combo_attack: bool = false
 var can_air_jump: bool = false
 var is_dead: bool = false
+var current_jump_count: int = 0
 
 func _physics_process(delta: float) -> void:
 	progress_bar.value = health
@@ -46,6 +47,8 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, running_speed)
 	
+	# print("Air jump: ", can_air_jump)
+	
 	move_and_slide()
 	player_position_check()
 	state_switch()
@@ -62,32 +65,40 @@ func player_position_check():
 		sprite_2d.position.x = -5
 
 func state_switch():
-	if Input.is_action_just_pressed("jump") and state_machine.check_can_air_jump():
+	if Input.is_action_just_pressed("jump") and state_machine.check_can_air_jump() and current_jump_count <= 2:
 		can_air_jump = true
 		velocity.y = double_jump_power
+		current_jump_count += 1
 	#elif Input.is_action_just_pressed("attack2") and can_attack:
 		#can_combo_attack
 	elif Input.is_action_just_pressed("attack"):
 		can_attack = true
 	elif direction.x == 0 and is_on_floor():
+		current_jump_count = 0
 		idle = true
 		running = false
 		jump_starter = false
 		jump_finisher = false
 		player_fell = false
 	elif direction.x != 0 and is_on_floor():
+		current_jump_count = 0
 		idle = false
 		running = true
 		jump_starter = false
 		jump_finisher = false
 		player_fell = false
-	elif Input.is_action_just_pressed("jump") and velocity.y < 0:
+	elif Input.is_action_just_pressed("jump") and velocity.y <= 0:
+		current_jump_count += 1
 		idle = false
 		running = false
 		jump_starter = true
 		jump_finisher = false
 		player_fell = false
 	elif (raycast_jump_finish_right.is_colliding() or raycast_jump_finish_left.is_colliding()) and velocity.y > 0 and not is_on_floor():
+		# print("jump ended")
+		if Input.is_action_just_pressed("jump") and current_jump_count == 0:
+			can_air_jump = true
+			velocity.y = double_jump_power
 		idle = false
 		running = false
 		jump_starter = false

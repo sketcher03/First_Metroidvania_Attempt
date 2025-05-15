@@ -19,6 +19,9 @@ config/icon="res://icon.svg"
 
 Global="*res://Global.gd"
 GameManager="*res://game_manager.gd"
+SettingsManager="*res://settings_manager.gd"
+SceneManager="*res://scene_manager.gd"
+InventoryManager="*res://inventory_manager.gd"
 
 [display]
 
@@ -27,6 +30,14 @@ window/size/viewport_height=360
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="viewport"
+window/mjpeg_quality=1.0
+window/movie_file="D:/Game Dev/First_Metroidvania_Attempt/Devlogs/output.avi"
+window/main_scene="uid://hi378hlhek60"
+
+[editor]
+
+movie_writer/mjpeg_quality=1.0
+movie_writer/movie_file="D:/Game Dev/First_Metroidvania_Attempt/Devlogs/output.avi"
 
 [global_group]
 
@@ -66,6 +77,8 @@ attack={
 2d_physics/layer_3="ENEMY"
 2d_physics/layer_4="UTILITY_PICKUPS"
 2d_physics/layer_5="COLLECTIBLES"
+2d_physics/layer_6="PORTALS"
+2d_physics/layer_7="KEYS"
 
 [rendering]
 

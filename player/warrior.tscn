@@ -442,11 +442,11 @@ offset_bottom = -49.0
 
 [node name="raycast_jump_finish_right" type="RayCast2D" parent="RayCasts"]
 position = Vector2(9, -8)
-target_position = Vector2(0, 35)
+target_position = Vector2(0, 24)
 
 [node name="raycast_jump_finish_left" type="RayCast2D" parent="RayCasts"]
 position = Vector2(-9, -8)
-target_position = Vector2(0, 35)
+target_position = Vector2(0, 24)
 
 [node name="StateMachine" type="Node2D" parent="."]
 script = ExtResource("46_2ja04")
@@ -494,6 +494,7 @@ shape = SubResource("CapsuleShape2D_wsj1a")
 disabled = true
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
+visible = false
 offset_left = -20.0
 offset_top = -47.0
 offset_right = 20.0

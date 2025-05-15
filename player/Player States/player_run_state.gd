@@ -17,5 +17,7 @@ func transition():
 			get_parent().change_state("Idle State")
 		elif owner.jump_starter:
 			get_parent().change_state("Jump Start State")
+		elif owner.jump_finisher:
+			get_parent().change_state("Jump End State")
 		elif owner.player_fell:
 			get_parent().change_state("Fall State")

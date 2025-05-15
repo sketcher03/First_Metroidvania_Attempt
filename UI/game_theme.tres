@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://bywxjnoede6dr"]
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://bywxjnoede6dr"]
 
 [ext_resource type="FontFile" uid="uid://d2qoxyh1atlbi" path="res://assets/UI/Jersey10-Regular.ttf" id="1_t6uax"]
 
@@ -89,6 +89,21 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v6yjg"]
+bg_color = Color(0.13, 0.0793, 0.10296, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_srt2q"]
+bg_color = Color(0.192157, 0.117647, 0.152941, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.858824, 0.505882, 0.345098, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
 [resource]
 Button/font_sizes/font_size = 24
 Button/fonts/font = ExtResource("1_t6uax")
@@ -102,3 +117,5 @@ MarginContainer/constants/margin_left = 10
 MarginContainer/constants/margin_right = 10
 MarginContainer/constants/margin_top = 10
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_1kavi")
+PopupMenu/styles/hover = SubResource("StyleBoxFlat_v6yjg")
+PopupMenu/styles/panel = SubResource("StyleBoxFlat_srt2q")

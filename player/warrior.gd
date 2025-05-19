@@ -68,6 +68,8 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, running_speed)
 	
+	if is_on_wall_only():
+		print("Wall Slide")
 	# print("Dash", dash)
 	
 	move_and_slide()

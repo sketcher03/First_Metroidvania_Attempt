@@ -4,7 +4,8 @@ const LOADING_SCREEN = preload("res://UI/loading_screen.tscn")
 
 var scenes: Dictionary = {
 	"Level 1": "res://levels/level_1.tscn",
-	"Level 2": "res://levels/test_levels/test_level.tscn",
+	"Level 2": "res://levels/level_2.tscn",
+	"Test Level": "res://levels/test_levels/test_level.tscn",
 }
 
 func transition_to_scene(level: String):

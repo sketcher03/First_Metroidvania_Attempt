@@ -6,7 +6,7 @@ func enter():
 	super.enter()
 	
 	can_transition = false
-	animation_player.play("Jump_Loop")
+	animation_player.play("Fall")
 	can_transition = true
 
 func transition():
@@ -19,3 +19,5 @@ func transition():
 			get_parent().change_state("Jump End State")
 		elif owner.can_air_jump:
 			get_parent().change_state("Air Jump State")
+		elif owner.can_swim:
+			get_parent().change_state("Swim State")

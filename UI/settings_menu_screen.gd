@@ -3,7 +3,7 @@ extends CanvasLayer
 @onready var window_mode_option_button: OptionButton = $MarginContainer/PanelContainer/MarginContainer/VBoxContainer/WindowModeOptionButton
 
 var window_modes: Dictionary = {
-	"Fullscreen": DisplayServer.WINDOW_MODE_FULLSCREEN,
+	"Fullscreen": DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN,
 	"Windowed": DisplayServer.WINDOW_MODE_WINDOWED,
 	"Windowed Maximized": DisplayServer.WINDOW_MODE_MAXIMIZED
 	}

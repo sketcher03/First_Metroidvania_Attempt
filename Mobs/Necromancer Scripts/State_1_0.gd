@@ -11,16 +11,16 @@ class_name State_1_0
 
 func _ready() -> void:
 	set_physics_process(false)
-	
+
 func enter():
 	set_physics_process(true)
-	
+
 func exit():
 	set_physics_process(false)
-	
+
 func transition():
 	pass
-	
+
 func _physics_process(_delta: float) -> void:
 	transition()
 	debug.text = name

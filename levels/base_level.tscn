@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cnyh4s6jlc4tg"]
+[gd_scene load_steps=8 format=3 uid="uid://cnyh4s6jlc4tg"]
 
 [ext_resource type="Texture2D" uid="uid://du33ipoyhgerq" path="res://assets/Fantasy Swamp Forest/Free/Terrain_and_Props.png" id="1_ew5uy"]
+[ext_resource type="PackedScene" uid="uid://dakfmwhm3j3af" path="res://levels/parallax_backgroundv_1.tscn" id="1_p5284"]
 [ext_resource type="PackedScene" uid="uid://ba83va73u5dfp" path="res://player/warrior.tscn" id="3_63c5o"]
 [ext_resource type="PackedScene" uid="uid://be2jp43ffd03e" path="res://UI/game_screen.tscn" id="3_satuh"]
 [ext_resource type="Script" uid="uid://ndvbh44bpib7" path="res://UI/player_camera.gd" id="7_maq6b"]
@@ -240,7 +241,7 @@ texture = ExtResource("1_ew5uy")
 13:9/0 = 0
 14:9/0 = 0
 15:9/0 = 0
-15:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3.41732, 5.03605, 0, -0.899294, 4.67633, -6.47491, 8, -8, 8, 2.87774, 1.07915, 8, -8, 8)
+15:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 8, 8, -8, 8, 2.69788, 1.97845, 8)
 16:9/0 = 0
 16:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -0.573085, 6.56183, 0.630394, 5.18642, 0.745011, 3.35255, -1.83387, 2.72215, -1.20348, 2.95139, 0.916936, 3.81102, 1.26079, 3.75371, 3.72505, 2.09176, 5.04315, 0.487123, 8, -8, 8)
 17:9/0 = 0
@@ -265,7 +266,7 @@ texture = ExtResource("1_ew5uy")
 14:10/0 = 0
 14:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -1.21831, 6.1423, 0.710679, 3.70568, 0.812204, 3.09653, 0, 3.19805, -1.11678, 1.87822, -1.31983, 1.16754, -0.507627, -1.16754, -0.507627, -2.5889, 0.507628, -6.1423, 0.609154, -8, -0.203051)
 15:10/0 = 0
-15:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, -3.75644, -6.24382, -2.63966, -2.1828, -3.55339, -1.87822, -8)
+15:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 1.61873, -8, -3.0576, -1.07915, -8, -1.61873)
 18:10/0 = 0
 19:10/0 = 0
 0:11/0 = 0
@@ -285,9 +286,7 @@ texture = ExtResource("1_ew5uy")
 1:14/0 = 0
 1:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 3.95689, -3.77703, 3.95689, 8, 8, -8, 8)
 0:15/0 = 0
-0:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:15/0 = 0
-1:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:16/0 = 0
 5:16/0 = 0
 6:16/0 = 0
@@ -556,7 +555,13 @@ sources/0 = SubResource("TileSetAtlasSource_vonw3")
 
 [node name="BaseLevel" type="Node2D"]
 
+[node name="ParallaxBackgroundv1" parent="." instance=ExtResource("1_p5284")]
+visible = false
+position = Vector2(147, -180)
+scale = Vector2(0.9, 0.9)
+
 [node name="Ground" type="TileMapLayer" parent="."]
+z_index = 7
 tile_set = SubResource("TileSet_oi3di")
 
 [node name="Warrior" parent="." instance=ExtResource("3_63c5o")]

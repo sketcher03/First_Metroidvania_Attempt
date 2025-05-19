@@ -168,8 +168,8 @@ grow_vertical = 2
 texture = SubResource("CanvasTexture_8rmg3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(322, 179)
+position = Vector2(323, 162)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_4nxec")
 autoplay = "default"
-frame_progress = 0.750966
+frame_progress = 0.712843

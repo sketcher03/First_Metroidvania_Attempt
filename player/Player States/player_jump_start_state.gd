@@ -21,3 +21,5 @@ func transition():
 			get_parent().change_state("Jump End State")
 		elif owner.can_air_jump:
 			get_parent().change_state("Air Jump State")
+		elif owner.is_edge_grabbing:
+			get_parent().change_state("Edge Grab State")

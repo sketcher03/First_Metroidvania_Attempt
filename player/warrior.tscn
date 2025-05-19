@@ -1,4 +1,4 @@
-[gd_scene load_steps=133 format=3 uid="uid://ba83va73u5dfp"]
+[gd_scene load_steps=134 format=3 uid="uid://ba83va73u5dfp"]
 
 [ext_resource type="Script" uid="uid://byff8l7y2bg6u" path="res://player/warrior.gd" id="1_2tt8p"]
 [ext_resource type="Texture2D" uid="uid://b7w81ylr5ec5m" path="res://assets/Warrior/Individual Sprite/idle/Warrior_Idle_1.png" id="1_hq7dw"]
@@ -104,6 +104,7 @@
 [ext_resource type="Texture2D" uid="uid://cowrycihgskfn" path="res://assets/Warrior/Individual Sprite/WallSlide/Warrior_WallSlide_1.png" id="88_0yiqb"]
 [ext_resource type="Texture2D" uid="uid://fnc6tax34yrc" path="res://assets/Warrior/Individual Sprite/WallSlide/Warrior_WallSlide_2.png" id="89_m75yd"]
 [ext_resource type="Texture2D" uid="uid://dfsniblegwot3" path="res://assets/Warrior/Individual Sprite/WallSlide/Warrior_WallSlide_3.png" id="90_ft0ps"]
+[ext_resource type="Script" uid="uid://pv1pwg40fb74" path="res://player/Player States/player_edge_grab_state.gd" id="104_esh0s"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hq7dw"]
 radius = 9.0
@@ -602,6 +603,161 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(-12, -8), Vector2(-18, -8), Vector2(-15, -8)]
+}
+
+[sub_resource type="Animation" id="Animation_l2ptc"]
+resource_name = "Edge_Grab"
+length = 0.416675
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("72_wn6lh"), ExtResource("73_esh0s"), ExtResource("74_2f0p5"), ExtResource("75_njubb"), ExtResource("76_205s2")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RayCasts/raycast_jump_finish_left:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0833333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-9, -13), Vector2(-8, -8)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RayCasts/raycast_jump_finish_right:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0833333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(7, -13), Vector2(8, -8)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape2D:shape:radius")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.0833333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [8.0, 8.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CollisionShape2D:shape:height")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.0833333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [34.0, 34.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CollisionShape2D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.0833333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-1, -23), Vector2(0, -18)]
+}
+
+[sub_resource type="Animation" id="Animation_ls8pd"]
+resource_name = "Edge_Idle"
+length = 0.60001
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("82_tcsit"), ExtResource("83_jpnsm"), ExtResource("84_vyb5c"), ExtResource("85_bjdmm"), ExtResource("86_uuano"), ExtResource("87_wkt3g")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:shape:radius")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [8.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:shape:height")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [34.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -18)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("RayCasts/raycast_jump_finish_right:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(8, -8)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("RayCasts/raycast_jump_finish_left:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-8, -8)]
 }
 
 [sub_resource type="Animation" id="Animation_auklf"]
@@ -1205,83 +1361,6 @@ tracks/5/keys = {
 "values": [Vector2(9, -8)]
 }
 
-[sub_resource type="Animation" id="Animation_l2ptc"]
-resource_name = "Edge_Grab"
-length = 0.416675
-step = 0.0833333
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [ExtResource("72_wn6lh"), ExtResource("73_esh0s"), ExtResource("74_2f0p5"), ExtResource("75_njubb"), ExtResource("76_205s2")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("RayCasts/raycast_jump_finish_left:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0833333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-9, -13), Vector2(-8, -8)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("RayCasts/raycast_jump_finish_right:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.0833333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(7, -13), Vector2(8, -8)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("CollisionShape2D:shape:radius")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.0833333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [8.0, 8.0]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("CollisionShape2D:shape:height")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.0833333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [34.0, 34.0]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("CollisionShape2D:position")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.0833333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-1, -23), Vector2(0, -18)]
-}
-
 [sub_resource type="Animation" id="Animation_ahl6x"]
 resource_name = "Slide"
 length = 0.583342
@@ -1357,84 +1436,6 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(-11, -8), Vector2(-9, -8), Vector2(-10, -8)]
-}
-
-[sub_resource type="Animation" id="Animation_ls8pd"]
-resource_name = "Edge_Idle"
-length = 0.60001
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [ExtResource("82_tcsit"), ExtResource("83_jpnsm"), ExtResource("84_vyb5c"), ExtResource("85_bjdmm"), ExtResource("86_uuano"), ExtResource("87_wkt3g")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionShape2D:shape:radius")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [8.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CollisionShape2D:shape:height")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [34.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("CollisionShape2D:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -18)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("RayCasts/raycast_jump_finish_right:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(8, -8)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("RayCasts/raycast_jump_finish_left:position")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-8, -8)]
 }
 
 [sub_resource type="Animation" id="Animation_b53dl"]
@@ -1643,6 +1644,14 @@ target_position = Vector2(0, 24)
 position = Vector2(-9, -8)
 target_position = Vector2(0, 24)
 
+[node name="raycast_grab_hand" type="RayCast2D" parent="RayCasts"]
+position = Vector2(0, -39)
+target_position = Vector2(15, 0)
+
+[node name="raycast_grab_check" type="RayCast2D" parent="RayCasts"]
+position = Vector2(0, -35)
+target_position = Vector2(15, 0)
+
 [node name="StateMachine" type="Node2D" parent="."]
 script = ExtResource("46_2ja04")
 
@@ -1686,6 +1695,9 @@ script = ExtResource("73_7iuao")
 
 [node name="Dash Attack State" type="Node2D" parent="StateMachine"]
 script = ExtResource("84_5soi3")
+
+[node name="Edge Grab State" type="Node2D" parent="StateMachine"]
+script = ExtResource("104_esh0s")
 
 [node name="Attack Area" type="Area2D" parent="."]
 collision_layer = 0

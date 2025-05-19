@@ -7,6 +7,9 @@ extends CharacterBody2D
 @onready var progress_bar: ProgressBar = $ProgressBar
 @onready var attack_area: Area2D = $"Attack Area"
 @onready var heal_effect_player: AnimationPlayer = $Heal_Effect_Player
+@onready var raycast_grab_hand: RayCast2D = $RayCasts/raycast_grab_hand
+@onready var raycast_grab_check: RayCast2D = $RayCasts/raycast_grab_check
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 @export var health = 100
 @export var running_speed = 150
@@ -34,16 +37,23 @@ var can_air_jump: bool = false
 var is_dead: bool = false
 var can_swim: bool = false
 var can_water_jump: bool = false
+var is_edge_grabbing: bool = false
 var current_jump_count: int = 0
 
 func _physics_process(delta: float) -> void:
 	progress_bar.value = health
 	
+	check_edge_grab()
+	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and (is_on_floor() or is_edge_grabbing):
+		is_edge_grabbing = false
 		velocity.y = jump_power
+	
+	if is_edge_grabbing:
+		return
 	
 	direction = Vector2(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), 0)
 	
@@ -58,6 +68,9 @@ func _physics_process(delta: float) -> void:
 	elif can_swim:
 		velocity.x = direction.x * swimming_speed
 		velocity.y = velocity.y * 0.5
+	elif is_on_wall_only():
+		print("Wall Slide")
+		# velocity.y = velocity.y * 0.75
 	else:
 		if dash:
 			var dash_direction = -1 if sprite_2d.flip_h else 1
@@ -68,9 +81,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, running_speed)
 	
-	if is_on_wall_only():
-		print("Wall Slide")
-	# print("Dash", dash)
+	# print("Edge Grab: ", is_edge_grabbing)
 	
 	move_and_slide()
 	player_position_check()
@@ -78,14 +89,19 @@ func _physics_process(delta: float) -> void:
 	Global.update_player_position(global_position)
 
 func player_position_check():
+	
 	if direction.x > 0:
 		sprite_2d.flip_h = false
 		attack_area.scale.x = 1
 		sprite_2d.position.x = 5
+		raycast_grab_check.target_position.x = 15
+		raycast_grab_hand.target_position.x = 15
 	elif direction.x < 0:
 		sprite_2d.flip_h = true
 		attack_area.scale.x = -1
 		sprite_2d.position.x = -5
+		raycast_grab_check.target_position.x = -15
+		raycast_grab_hand.target_position.x = -15
 
 func state_switch():
 	if Input.is_action_just_pressed("jump") and state_machine.check_can_air_jump() and current_jump_count <= 2:
@@ -96,7 +112,7 @@ func state_switch():
 		#can_combo_attack
 	elif Input.is_action_just_pressed("attack") and !dash:
 		can_attack = true
-	elif Input.is_action_just_pressed("dash") and is_on_floor() and !can_swim:
+	elif Input.is_action_just_pressed("dash") and !can_swim:
 		can_dash_attack = false
 		dash = true
 	elif Input.is_action_just_pressed("attack") and dash:
@@ -156,6 +172,22 @@ func state_switch():
 
 func reset_air_jump():
 	can_air_jump = false
+
+func check_edge_grab():
+	# player_fell
+	print("Edge Grab: ", is_edge_grabbing, " Player Sprite Position x: ", sprite_2d.position.x)
+	var check_hand = not raycast_grab_hand.is_colliding()
+	var check_grab_height = raycast_grab_check.is_colliding()
+	var player_flipped = sprite_2d.flip_h
+	
+	if is_edge_grabbing:
+		if sprite_2d.flip_h:
+			sprite_2d.position.x = -9
+		else:
+			sprite_2d.position.x = 11
+	
+	if velocity.y >= 0 and check_hand and check_grab_height and not is_edge_grabbing and is_on_wall_only() and not can_swim:
+		is_edge_grabbing = true
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemies"):

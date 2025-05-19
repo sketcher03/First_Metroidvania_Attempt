@@ -1,4 +1,4 @@
-[gd_scene load_steps=136 format=3 uid="uid://ba83va73u5dfp"]
+[gd_scene load_steps=137 format=3 uid="uid://ba83va73u5dfp"]
 
 [ext_resource type="Script" uid="uid://byff8l7y2bg6u" path="res://player/warrior.gd" id="1_2tt8p"]
 [ext_resource type="Texture2D" uid="uid://b7w81ylr5ec5m" path="res://assets/Warrior/Individual Sprite/idle/Warrior_Idle_1.png" id="1_hq7dw"]
@@ -106,6 +106,7 @@
 [ext_resource type="Texture2D" uid="uid://dfsniblegwot3" path="res://assets/Warrior/Individual Sprite/WallSlide/Warrior_WallSlide_3.png" id="90_ft0ps"]
 [ext_resource type="Script" uid="uid://pv1pwg40fb74" path="res://player/Player States/player_edge_grab_state.gd" id="104_esh0s"]
 [ext_resource type="Script" uid="uid://bnjrggn2p6xtx" path="res://player/Player States/player_wall_cling_state.gd" id="105_2f0p5"]
+[ext_resource type="Script" uid="uid://cmkhtog1khkee" path="res://player/Player States/player_wall_slide_state.gd" id="106_njubb"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hq7dw"]
 radius = 9.0
@@ -1781,6 +1782,9 @@ script = ExtResource("104_esh0s")
 
 [node name="Wall Cling State" type="Node2D" parent="StateMachine"]
 script = ExtResource("105_2f0p5")
+
+[node name="Wall Slide State" type="Node2D" parent="StateMachine"]
+script = ExtResource("106_njubb")
 
 [node name="Attack Area" type="Area2D" parent="."]
 collision_layer = 0

@@ -39,6 +39,7 @@ var can_swim: bool = false
 var can_water_jump: bool = false
 var is_edge_grabbing: bool = false
 var can_wall_cling: bool = false
+var can_wall_slide: bool = false
 var current_jump_count: int = 0
 
 func _physics_process(delta: float) -> void:
@@ -46,17 +47,22 @@ func _physics_process(delta: float) -> void:
 	
 	check_edge_grab()
 	check_wall_cling()
+	check_wall_slide(delta)
 	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	
-	if Input.is_action_just_pressed("jump") and (is_on_floor() or is_edge_grabbing or can_wall_cling):
+	if Input.is_action_just_pressed("jump") and (is_on_floor() or is_edge_grabbing or can_wall_cling or can_wall_slide):
 		is_edge_grabbing = false
 		can_wall_cling = false
+		can_wall_slide = false
 		velocity.y = jump_power
 	
 	if is_edge_grabbing or can_wall_cling:
-		return
+		if not can_wall_slide:
+			return
+		else:
+			velocity.y = 75.0
 	
 	direction = Vector2(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), 0)
 	
@@ -173,8 +179,7 @@ func reset_air_jump():
 	can_air_jump = false
 
 func check_edge_grab():
-	# player_fell
-	print("Edge Grab: ", is_edge_grabbing, " Player Sprite Position x: ", sprite_2d.position.x)
+	print("Player Sprite Position x: ", sprite_2d.position.x)
 	var check_hand = not raycast_grab_hand.is_colliding()
 	var check_grab_height = raycast_grab_check.is_colliding()
 	
@@ -187,8 +192,15 @@ func check_edge_grab():
 	if velocity.y >= 0 and check_hand and check_grab_height and not is_edge_grabbing and is_on_wall_only() and not can_swim:
 		is_edge_grabbing = true
 
+func check_wall_slide(delta: float):
+	print("Wall Slide: ", can_wall_slide)
+	if can_wall_cling:
+		if Input.is_action_pressed("wall_slide") and is_on_wall_only() and not is_on_floor():
+			can_wall_slide = true
+			# velocity.y = velocity.y * 0.2
+			# animation_player.play("Wall_Slide")
+
 func check_wall_cling():
-	print("Wall Cling Started")
 	var check_hand = raycast_grab_hand.is_colliding()
 	var check_grab_height = raycast_grab_check.is_colliding()
 	

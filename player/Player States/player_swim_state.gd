@@ -19,3 +19,8 @@ func transition():
 			get_parent().change_state("Idle State")
 		elif owner.running:
 			get_parent().change_state("Run State")
+		if not owner.can_swim and owner.can_water_jump:
+			if owner.is_edge_grabbing:
+				get_parent().change_state("Edge Grab State")
+			elif owner.can_wall_cling:
+				get_parent().change_state("Wall Cling State")

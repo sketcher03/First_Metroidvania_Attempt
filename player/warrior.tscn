@@ -1,4 +1,4 @@
-[gd_scene load_steps=134 format=3 uid="uid://ba83va73u5dfp"]
+[gd_scene load_steps=136 format=3 uid="uid://ba83va73u5dfp"]
 
 [ext_resource type="Script" uid="uid://byff8l7y2bg6u" path="res://player/warrior.gd" id="1_2tt8p"]
 [ext_resource type="Texture2D" uid="uid://b7w81ylr5ec5m" path="res://assets/Warrior/Individual Sprite/idle/Warrior_Idle_1.png" id="1_hq7dw"]
@@ -105,6 +105,7 @@
 [ext_resource type="Texture2D" uid="uid://fnc6tax34yrc" path="res://assets/Warrior/Individual Sprite/WallSlide/Warrior_WallSlide_2.png" id="89_m75yd"]
 [ext_resource type="Texture2D" uid="uid://dfsniblegwot3" path="res://assets/Warrior/Individual Sprite/WallSlide/Warrior_WallSlide_3.png" id="90_ft0ps"]
 [ext_resource type="Script" uid="uid://pv1pwg40fb74" path="res://player/Player States/player_edge_grab_state.gd" id="104_esh0s"]
+[ext_resource type="Script" uid="uid://bnjrggn2p6xtx" path="res://player/Player States/player_wall_cling_state.gd" id="105_2f0p5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hq7dw"]
 radius = 9.0
@@ -1516,6 +1517,84 @@ tracks/5/keys = {
 "values": [Vector2(-8, -8)]
 }
 
+[sub_resource type="Animation" id="Animation_esh0s"]
+resource_name = "Wall_Cling"
+length = 0.0833416
+loop_mode = 1
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("88_0yiqb")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:shape:radius")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [8.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:shape:height")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [34.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -18)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("RayCasts/raycast_jump_finish_right:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(8, -8)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("RayCasts/raycast_jump_finish_left:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-8, -8)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kyvjc"]
 _data = {
 &"Attack": SubResource("Animation_v8mi5"),
@@ -1533,6 +1612,7 @@ _data = {
 &"RESET": SubResource("Animation_1ccis"),
 &"Run": SubResource("Animation_qq4xg"),
 &"Slide": SubResource("Animation_ahl6x"),
+&"Wall_Cling": SubResource("Animation_esh0s"),
 &"Wall_Slide": SubResource("Animation_b53dl")
 }
 
@@ -1698,6 +1778,9 @@ script = ExtResource("84_5soi3")
 
 [node name="Edge Grab State" type="Node2D" parent="StateMachine"]
 script = ExtResource("104_esh0s")
+
+[node name="Wall Cling State" type="Node2D" parent="StateMachine"]
+script = ExtResource("105_2f0p5")
 
 [node name="Attack Area" type="Area2D" parent="."]
 collision_layer = 0

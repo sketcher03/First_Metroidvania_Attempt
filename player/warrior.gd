@@ -38,21 +38,24 @@ var is_dead: bool = false
 var can_swim: bool = false
 var can_water_jump: bool = false
 var is_edge_grabbing: bool = false
+var can_wall_cling: bool = false
 var current_jump_count: int = 0
 
 func _physics_process(delta: float) -> void:
 	progress_bar.value = health
 	
 	check_edge_grab()
+	check_wall_cling()
 	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	
-	if Input.is_action_just_pressed("jump") and (is_on_floor() or is_edge_grabbing):
+	if Input.is_action_just_pressed("jump") and (is_on_floor() or is_edge_grabbing or can_wall_cling):
 		is_edge_grabbing = false
+		can_wall_cling = false
 		velocity.y = jump_power
 	
-	if is_edge_grabbing:
+	if is_edge_grabbing or can_wall_cling:
 		return
 	
 	direction = Vector2(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), 0)
@@ -68,9 +71,6 @@ func _physics_process(delta: float) -> void:
 	elif can_swim:
 		velocity.x = direction.x * swimming_speed
 		velocity.y = velocity.y * 0.5
-	elif is_on_wall_only():
-		print("Wall Slide")
-		# velocity.y = velocity.y * 0.75
 	else:
 		if dash:
 			var dash_direction = -1 if sprite_2d.flip_h else 1
@@ -89,7 +89,6 @@ func _physics_process(delta: float) -> void:
 	Global.update_player_position(global_position)
 
 func player_position_check():
-	
 	if direction.x > 0:
 		sprite_2d.flip_h = false
 		attack_area.scale.x = 1
@@ -178,7 +177,6 @@ func check_edge_grab():
 	print("Edge Grab: ", is_edge_grabbing, " Player Sprite Position x: ", sprite_2d.position.x)
 	var check_hand = not raycast_grab_hand.is_colliding()
 	var check_grab_height = raycast_grab_check.is_colliding()
-	var player_flipped = sprite_2d.flip_h
 	
 	if is_edge_grabbing:
 		if sprite_2d.flip_h:
@@ -188,6 +186,21 @@ func check_edge_grab():
 	
 	if velocity.y >= 0 and check_hand and check_grab_height and not is_edge_grabbing and is_on_wall_only() and not can_swim:
 		is_edge_grabbing = true
+
+func check_wall_cling():
+	print("Wall Cling Started")
+	var check_hand = raycast_grab_hand.is_colliding()
+	var check_grab_height = raycast_grab_check.is_colliding()
+	
+	if sprite_2d.flip_h:
+		sprite_2d.flip_h = true
+		sprite_2d.position.x = -10
+	else:
+		sprite_2d.flip_h = false
+		sprite_2d.position.x = 11
+	
+	if velocity.y >= 0 and check_grab_height and check_hand and is_on_wall_only() and Input.is_action_pressed("wall_cling") and not can_wall_cling:
+		can_wall_cling = true
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemies"):

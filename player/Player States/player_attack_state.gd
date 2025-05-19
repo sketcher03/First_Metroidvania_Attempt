@@ -27,4 +27,3 @@ func transition():
 			get_parent().change_state("Jump End State")
 		elif owner.is_edge_grabbing:
 			get_parent().change_state("Edge Grab State")
-		

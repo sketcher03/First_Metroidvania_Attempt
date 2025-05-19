@@ -23,3 +23,5 @@ func transition():
 			get_parent().change_state("Swim State")
 		elif owner.is_edge_grabbing:
 			get_parent().change_state("Edge Grab State")
+		elif owner.can_wall_cling:
+			get_parent().change_state("Wall Cling State")

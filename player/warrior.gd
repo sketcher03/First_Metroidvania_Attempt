@@ -189,7 +189,7 @@ func check_edge_grab():
 		else:
 			sprite_2d.position.x = 11
 	
-	if velocity.y >= 0 and check_hand and check_grab_height and not is_edge_grabbing and is_on_wall_only() and not can_swim:
+	if velocity.y >= 0 and check_hand and check_grab_height and not is_edge_grabbing and is_on_wall_only() and not can_swim and not is_on_floor():
 		is_edge_grabbing = true
 
 func check_wall_slide(delta: float):

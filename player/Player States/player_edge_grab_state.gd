@@ -14,3 +14,10 @@ func enter():
 func transition():
 	if can_transition and owner.jump_starter:
 		get_parent().change_state("Jump Start State")
+	elif can_transition and owner.is_on_floor():
+		if owner.running:
+			get_parent().change_state("Run State")
+		elif owner.idle:
+			get_parent().change_state("Idle State")
+		elif owner.dash:
+			get_parent().change_state("Dash State")

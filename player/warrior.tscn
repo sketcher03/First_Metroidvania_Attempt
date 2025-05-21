@@ -1,4 +1,4 @@
-[gd_scene load_steps=138 format=3 uid="uid://ba83va73u5dfp"]
+[gd_scene load_steps=151 format=3 uid="uid://ba83va73u5dfp"]
 
 [ext_resource type="Script" uid="uid://byff8l7y2bg6u" path="res://player/warrior.gd" id="1_2tt8p"]
 [ext_resource type="Texture2D" uid="uid://b7w81ylr5ec5m" path="res://assets/Warrior/Individual Sprite/idle/Warrior_Idle_1.png" id="1_hq7dw"]
@@ -51,7 +51,6 @@
 [ext_resource type="Script" uid="uid://282yi05lwf3i" path="res://player/Player States/player_idle_state.gd" id="47_wdfis"]
 [ext_resource type="Texture2D" uid="uid://d0qmp003ja7qe" path="res://assets/Warrior/Individual Sprite/Fall/Warrior_Fall_3.png" id="48_7i1nj"]
 [ext_resource type="Script" uid="uid://olbydmyq6spy" path="res://player/Player States/player_run_state.gd" id="48_dw51i"]
-[ext_resource type="Texture2D" uid="uid://cxivw7yyn42ho" path="res://assets/Warrior/Individual Sprite/Crouch/Warrior_Crouch_1.png" id="49_c1njj"]
 [ext_resource type="Script" uid="uid://ch1ngo1wxh2tj" path="res://player/Player States/player_attack_state.gd" id="49_uwmfe"]
 [ext_resource type="Script" uid="uid://dnhub185q7k1w" path="res://player/Player States/player_jump_start_state.gd" id="50_5ej7l"]
 [ext_resource type="Texture2D" uid="uid://o1uq570objqw" path="res://assets/Warrior/Individual Sprite/Crouch/Warrior_Crouch_2.png" id="50_i86xs"]
@@ -62,7 +61,6 @@
 [ext_resource type="Script" uid="uid://d1201ij10tn27" path="res://player/Player States/player_fall_state.gd" id="53_6bw6f"]
 [ext_resource type="Texture2D" uid="uid://r6yah4vykffq" path="res://assets/Warrior/Individual Sprite/Crouch/Warrior_Crouch_5.png" id="53_pasiw"]
 [ext_resource type="Script" uid="uid://dealllcbg38lf" path="res://player/Player States/player_hurt_state.gd" id="54_qmf5v"]
-[ext_resource type="Texture2D" uid="uid://bn4jnct5hphii" path="res://assets/Warrior/Individual Sprite/Crouch/Warrior_Crouch_6.png" id="54_wustv"]
 [ext_resource type="Texture2D" uid="uid://b7b2uw4fgd74s" path="res://assets/Warrior/Individual Sprite/Dash/Warrior_Dash_1.png" id="55_4qmvi"]
 [ext_resource type="Script" uid="uid://bavkguxq1bw26" path="res://player/Player States/player_death_state.gd" id="55_c1njj"]
 [ext_resource type="Texture2D" uid="uid://db24rmtxhspo2" path="res://assets/Warrior/Individual Sprite/Dash/Warrior_Dash_2.png" id="56_0bdf4"]
@@ -102,12 +100,24 @@
 [ext_resource type="Texture2D" uid="uid://7c5uhtw3ab13" path="res://assets/Warrior/Individual Sprite/Edge-Idle/Warrior_Edge-Idle_5.png" id="86_uuano"]
 [ext_resource type="Texture2D" uid="uid://dl5w2ptduvomh" path="res://assets/Warrior/Individual Sprite/Edge-Idle/Warrior_Edge-Idle_6.png" id="87_wkt3g"]
 [ext_resource type="Texture2D" uid="uid://cowrycihgskfn" path="res://assets/Warrior/Individual Sprite/WallSlide/Warrior_WallSlide_1.png" id="88_0yiqb"]
+[ext_resource type="Texture2D" uid="uid://n0wr71aelrnc" path="res://assets/Warrior/Individual Sprite/Ladder-Grab/Warrior-Ladder-Grab_1.png" id="89_jpnsm"]
 [ext_resource type="Texture2D" uid="uid://fnc6tax34yrc" path="res://assets/Warrior/Individual Sprite/WallSlide/Warrior_WallSlide_2.png" id="89_m75yd"]
 [ext_resource type="Texture2D" uid="uid://dfsniblegwot3" path="res://assets/Warrior/Individual Sprite/WallSlide/Warrior_WallSlide_3.png" id="90_ft0ps"]
+[ext_resource type="Texture2D" uid="uid://dntb603x04s1w" path="res://assets/Warrior/Individual Sprite/Ladder-Grab/Warrior-Ladder-Grab_2.png" id="90_vyb5c"]
+[ext_resource type="Texture2D" uid="uid://cj0k5g1gfukf5" path="res://assets/Warrior/Individual Sprite/Ladder-Grab/Warrior-Ladder-Grab_3.png" id="91_bjdmm"]
+[ext_resource type="Texture2D" uid="uid://cbkhg3uvxsdk0" path="res://assets/Warrior/Individual Sprite/Ladder-Grab/Warrior-Ladder-Grab_4.png" id="92_uuano"]
+[ext_resource type="Texture2D" uid="uid://cfmlq0lplqktf" path="res://assets/Warrior/Individual Sprite/Ladder-Grab/Warrior-Ladder-Grab_5.png" id="93_wkt3g"]
+[ext_resource type="Texture2D" uid="uid://h0a708ienerr" path="res://assets/Warrior/Individual Sprite/Ladder-Grab/Warrior-Ladder-Grab_6.png" id="94_0yiqb"]
+[ext_resource type="Texture2D" uid="uid://b6kw4dfl0htal" path="res://assets/Warrior/Individual Sprite/Ladder-Grab/Warrior-Ladder-Grab_7.png" id="95_m75yd"]
+[ext_resource type="Texture2D" uid="uid://dmaa3eqwn47y7" path="res://assets/Warrior/Individual Sprite/Ladder-Grab/Warrior-Ladder-Grab_8.png" id="96_ft0ps"]
 [ext_resource type="Script" uid="uid://pv1pwg40fb74" path="res://player/Player States/player_edge_grab_state.gd" id="104_esh0s"]
 [ext_resource type="Script" uid="uid://bnjrggn2p6xtx" path="res://player/Player States/player_wall_cling_state.gd" id="105_2f0p5"]
+[ext_resource type="Script" uid="uid://cxo536qpvvrgg" path="res://player/Player States/player_crouch_state.gd" id="106_205s2"]
 [ext_resource type="Script" uid="uid://cmkhtog1khkee" path="res://player/Player States/player_wall_slide_state.gd" id="106_njubb"]
 [ext_resource type="Script" uid="uid://cn6y8m3g22h4v" path="res://player/Player States/player_slide_state.gd" id="107_205s2"]
+[ext_resource type="Script" uid="uid://bpvla1452hnko" path="res://player/Player States/player_ladder_grab_state.gd" id="115_vyb5c"]
+[ext_resource type="Script" uid="uid://81adwkaii41j" path="res://player/Player States/player_ladder_climb_up_state.gd" id="116_uuano"]
+[ext_resource type="Script" uid="uid://d2wtywwj5sesu" path="res://player/Player States/player_ladder_climb_down_state.gd" id="117_wkt3g"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hq7dw"]
 radius = 9.0
@@ -252,8 +262,9 @@ tracks/10/keys = {
 
 [sub_resource type="Animation" id="Animation_12708"]
 resource_name = "Crouch"
-length = 0.500008
-step = 0.0833333
+length = 0.444456
+loop_mode = 1
+step = 0.111111
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -261,10 +272,10 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.111111, 0.222222, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("49_c1njj"), ExtResource("50_i86xs"), ExtResource("51_36tot"), ExtResource("52_x2sdj"), ExtResource("53_pasiw"), ExtResource("54_wustv")]
+"values": [ExtResource("50_i86xs"), ExtResource("51_36tot"), ExtResource("52_x2sdj"), ExtResource("53_pasiw")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -273,10 +284,10 @@ tracks/1/path = NodePath("CollisionShape2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0833333, 0.333333, 0.416667),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.333333),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-3, -14), Vector2(-3, -11), Vector2(-3, -11), Vector2(-3, -14)]
+"values": [Vector2(-2, -8), Vector2(-2, -8)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -285,10 +296,10 @@ tracks/2/path = NodePath("CollisionShape2D:shape:height")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.0833333, 0.333333, 0.416667),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.333333),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [28.0, 22.0, 22.0, 28.0]
+"values": [16.0, 16.0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -297,10 +308,10 @@ tracks/3/path = NodePath("CollisionShape2D:shape:radius")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.416667),
+"times": PackedFloat32Array(0, 0.333333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [9.0, 9.0]
+"values": [8.0, 8.0]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -324,7 +335,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-12, -8)]
+"values": [Vector2(-10, -8)]
 }
 
 [sub_resource type="Animation" id="Animation_p5fu8"]
@@ -1366,7 +1377,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id="Animation_ahl6x"]
 resource_name = "Slide"
-length = 0.583342
+length = 0.500008
 step = 0.0833333
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1375,10 +1386,10 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.083333, 0.166667, 0.25, 0.333334, 0.416667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("77_0io12"), ExtResource("78_mxmd6"), ExtResource("79_j2ohx"), ExtResource("78_mxmd6"), ExtResource("79_j2ohx"), ExtResource("80_1r1cx"), ExtResource("81_5j5mk")]
+"values": [ExtResource("77_0io12"), ExtResource("78_mxmd6"), ExtResource("78_mxmd6"), ExtResource("79_j2ohx"), ExtResource("80_1r1cx"), ExtResource("81_5j5mk")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -1387,10 +1398,10 @@ tracks/1/path = NodePath("CollisionShape2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.333333, 0.416667, 0.5),
+"times": PackedFloat32Array(0, 0.25, 0.333334, 0.416667),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(-3, -9), Vector2(-3, -9), Vector2(-1, -10), Vector2(-2, -14)]
+"values": [Vector2(-3, -8), Vector2(-3, -8), Vector2(-1, -10), Vector2(-2, -14)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -1399,10 +1410,10 @@ tracks/2/path = NodePath("CollisionShape2D:shape:height")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.333333, 0.416667, 0.5),
+"times": PackedFloat32Array(0, 0.25, 0.333334, 0.416667),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [18.0, 18.0, 20.0, 28.0]
+"values": [16.0, 16.0, 20.0, 28.0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -1411,7 +1422,7 @@ tracks/3/path = NodePath("CollisionShape2D:shape:radius")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.333333, 0.416667, 0.5),
+"times": PackedFloat32Array(0, 0.25, 0.333334, 0.416667),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [8.0, 8.0, 8.0, 8.0]
@@ -1423,10 +1434,10 @@ tracks/4/path = NodePath("RayCasts/raycast_jump_finish_right:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.416667, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.25, 0.333334, 0.416667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(5, -8), Vector2(7, -8), Vector2(6, -8)]
+"values": [Vector2(5, -8), Vector2(5, -8), Vector2(7, -8), Vector2(6, -8)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -1435,10 +1446,10 @@ tracks/5/path = NodePath("RayCasts/raycast_jump_finish_left:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.416667, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.166666, 0.25, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(-11, -8), Vector2(-9, -8), Vector2(-10, -8)]
+"values": [Vector2(-11, -8), Vector2(-11, -8), Vector2(-9, -8), Vector2(-10, -8)]
 }
 
 [sub_resource type="Animation" id="Animation_esh0s"]
@@ -1597,6 +1608,132 @@ tracks/5/keys = {
 "values": [Vector2(-8, -8)]
 }
 
+[sub_resource type="Animation" id="Animation_y6equ"]
+resource_name = "Ladder_Grab"
+length = 0.10001
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("91_bjdmm")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -20)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:shape:radius")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [8.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape2D:shape:height")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [34.0]
+}
+
+[sub_resource type="Animation" id="Animation_jpnsm"]
+resource_name = "Ladder_Climb_Up"
+length = 0.80001
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("89_jpnsm"), ExtResource("90_vyb5c"), ExtResource("91_bjdmm"), ExtResource("92_uuano"), ExtResource("93_wkt3g"), ExtResource("94_0yiqb"), ExtResource("95_m75yd"), ExtResource("96_ft0ps")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:shape:radius")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [8.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:shape:height")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [34.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -20)]
+}
+
+[sub_resource type="Animation" id="Animation_vyb5c"]
+resource_name = "Ladder_Climb_Down"
+length = 0.80001
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("96_ft0ps"), ExtResource("95_m75yd"), ExtResource("94_0yiqb"), ExtResource("93_wkt3g"), ExtResource("92_uuano"), ExtResource("91_bjdmm"), ExtResource("90_vyb5c"), ExtResource("89_jpnsm")]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kyvjc"]
 _data = {
 &"Attack": SubResource("Animation_v8mi5"),
@@ -1611,6 +1748,9 @@ _data = {
 &"Idle": SubResource("Animation_b3m8a"),
 &"Jump": SubResource("Animation_uql5f"),
 &"Jump_Loop": SubResource("Animation_ns54s"),
+&"Ladder_Climb_Down": SubResource("Animation_vyb5c"),
+&"Ladder_Climb_Up": SubResource("Animation_jpnsm"),
+&"Ladder_Grab": SubResource("Animation_y6equ"),
 &"RESET": SubResource("Animation_1ccis"),
 &"Run": SubResource("Animation_qq4xg"),
 &"Slide": SubResource("Animation_ahl6x"),
@@ -1737,6 +1877,15 @@ target_position = Vector2(15, 0)
 position = Vector2(0, -34)
 target_position = Vector2(15, 0)
 
+[node name="raycast_ceiling_check" type="RayCast2D" parent="RayCasts"]
+position = Vector2(-1, -17)
+target_position = Vector2(0, -30)
+
+[node name="raycast_ladder_check" type="RayCast2D" parent="RayCasts"]
+target_position = Vector2(0, -40)
+collision_mask = 256
+hit_from_inside = true
+
 [node name="StateMachine" type="Node2D" parent="."]
 script = ExtResource("46_2ja04")
 
@@ -1792,6 +1941,18 @@ script = ExtResource("106_njubb")
 
 [node name="Slide State" type="Node2D" parent="StateMachine"]
 script = ExtResource("107_205s2")
+
+[node name="Crouch State" type="Node2D" parent="StateMachine"]
+script = ExtResource("106_205s2")
+
+[node name="Ladder Grab State" type="Node2D" parent="StateMachine"]
+script = ExtResource("115_vyb5c")
+
+[node name="Ladder Climb Up State" type="Node2D" parent="StateMachine"]
+script = ExtResource("116_uuano")
+
+[node name="Ladder Climb Down State" type="Node2D" parent="StateMachine"]
+script = ExtResource("117_wkt3g")
 
 [node name="Attack Area" type="Area2D" parent="."]
 collision_layer = 0

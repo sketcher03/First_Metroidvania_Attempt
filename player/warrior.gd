@@ -4,6 +4,8 @@ extends CharacterBody2D
 @onready var state_machine: Node2D = $StateMachine
 @onready var raycast_jump_finish_right: RayCast2D = $RayCasts/raycast_jump_finish_right
 @onready var raycast_jump_finish_left: RayCast2D = $RayCasts/raycast_jump_finish_left
+@onready var raycast_ceiling_check: RayCast2D = $RayCasts/raycast_ceiling_check
+@onready var raycast_ladder_check: RayCast2D = $RayCasts/raycast_ladder_check
 @onready var progress_bar: ProgressBar = $ProgressBar
 @onready var attack_area: Area2D = $"Attack Area"
 @onready var heal_effect_player: AnimationPlayer = $Heal_Effect_Player
@@ -14,10 +16,13 @@ extends CharacterBody2D
 @export var health = 100
 @export var running_speed = 150
 @export var swimming_speed = 75
+@export var crouch_speed = 60
 @export var dash_speed = 300
+@export var slide_speed = 200
 @export var jump_power = -300
 @export var double_jump_power = -300
 @export var player_damage = 10
+@export var dash_attack_damage = 30
 @export var knockback_force = Vector2(350, -25)
 
 var direction: Vector2 = Vector2.ZERO
@@ -28,6 +33,7 @@ var idle: bool = false
 var running: bool = false
 var dash: bool = false
 var slide: bool = false
+var crouch: bool = false
 var can_dash_attack: bool = false
 var jump_starter: bool = false
 var jump_finisher: bool = false
@@ -39,6 +45,10 @@ var is_dead: bool = false
 var can_swim: bool = false
 var can_water_jump: bool = true
 var is_edge_grabbing: bool = false
+var is_climbing: bool = false
+var is_climbing_stopped: bool = false
+var is_climbing_up: bool = false
+var is_climbing_down: bool = false
 var can_wall_cling: bool = false
 var can_wall_slide: bool = false
 var current_jump_count: int = 0
@@ -50,20 +60,27 @@ func _physics_process(delta: float) -> void:
 	check_wall_cling()
 	check_wall_slide()
 	
-	# print("Swim: ", can_swim, ", Idle: ", idle, ", Running: ", running)
+	print("Direction: ", direction, " Stop: ", is_climbing_stopped, " Up: ", is_climbing_up, " Down: ", is_climbing_down)
 	
-	if not is_on_floor():
+	if not is_on_floor() and not is_climbing:
 		if is_edge_grabbing or can_wall_cling:
 			velocity = Vector2.ZERO
-		if can_wall_slide:
+		elif can_wall_slide:
 			velocity.y = 100.0
 		else:
 			velocity += get_gravity() * delta
-	
-	if Input.is_action_just_pressed("jump") and (is_on_floor() or is_edge_grabbing or can_wall_cling or can_wall_slide):
+	elif is_climbing:
+		if direction.y != 0:
+			velocity.x = 0
+			velocity.y = direction.y * swimming_speed
+		else:
+			velocity = Vector2.ZERO
+
+	if Input.is_action_just_pressed("jump") and (is_on_floor() or is_edge_grabbing or can_wall_cling or can_wall_slide or is_climbing):
 		is_edge_grabbing = false
 		can_wall_cling = false
 		can_wall_slide = false
+		is_climbing = false
 		velocity.y = jump_power
 	
 	if is_edge_grabbing or can_wall_cling:
@@ -77,26 +94,33 @@ func _physics_process(delta: float) -> void:
 			player_fell = true
 	
 	direction = Vector2(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), 0)
+	direction.y = Input.get_action_strength("wall_slide") - Input.get_action_strength("wall_cling") if is_climbing else 0.0
 	
-	if not can_wall_slide and not can_wall_cling and not is_edge_grabbing:
+	if not can_wall_slide and not can_wall_cling and not is_edge_grabbing and not is_climbing:
 		if direction.x != 0 and state_machine.check_if_can_move() and not can_swim:
-			if dash or slide:
+			if dash:
 				if not can_dash_attack:
 					velocity.x = direction.x * dash_speed
 				else:
 					velocity.x = move_toward(velocity.x, 0, dash_speed)
+			elif slide:
+				velocity.x = direction.x * slide_speed
+			elif crouch and raycast_ceiling_check.is_colliding():
+				velocity.x = direction.x * crouch_speed
 			else:
 				velocity.x = direction.x * running_speed
 		elif can_swim and not can_water_jump:
 			velocity.x = direction.x * swimming_speed
 			velocity.y = velocity.y * 0.5
 		else:
-			if dash or slide:
-				var dash_direction = -1 if sprite_2d.flip_h else 1
+			var dash_direction = -1 if sprite_2d.flip_h else 1
+			if dash:
 				if not can_dash_attack:
 					velocity.x = dash_direction * dash_speed
 				else:
 					velocity.x = move_toward(velocity.x, 0, dash_speed)
+			elif slide:
+				velocity.x = dash_direction * slide_speed
 			else:
 				velocity.x = move_toward(velocity.x, 0, running_speed)
 	
@@ -104,7 +128,7 @@ func _physics_process(delta: float) -> void:
 	
 	if not is_edge_grabbing and not can_wall_cling:
 		move_and_slide()
-	if not can_wall_slide and not is_edge_grabbing and not can_wall_cling:
+	if not can_wall_slide and not is_edge_grabbing and not can_wall_cling and not is_climbing:
 		player_position_check()
 	state_switch()
 	Global.update_player_position(global_position)
@@ -129,6 +153,8 @@ func player_position_check():
 			sprite_2d.position.x = 5
 
 func state_switch():
+	var ladderCollider = raycast_ladder_check.get_collider()
+	
 	if velocity.y > 0 and not raycast_jump_finish_right.is_colliding() and not raycast_jump_finish_left.is_colliding() and not can_swim:
 		idle = false
 		running = false
@@ -144,17 +170,64 @@ func state_switch():
 		#can_combo_attack
 	elif Input.is_action_just_pressed("attack") and !dash:
 		can_attack = true
+		crouch = false
+	elif ladderCollider and (Input.is_action_pressed("wall_cling") or Input.is_action_pressed("wall_slide")) and !is_climbing:
+		slide = false
+		idle = false
+		running = false
+		crouch = false
+		jump_starter = false
+		jump_finisher = false
+		player_fell = false
+		is_climbing = true
+	elif ladderCollider and is_climbing:
+		if direction.y > 0:
+			is_climbing_down = true
+			is_climbing_stopped = false
+			is_climbing_up = false
+		elif direction.y < 0:
+			is_climbing_down = false
+			is_climbing_stopped = false
+			is_climbing_up = true
+		elif is_on_floor() and (raycast_jump_finish_right.is_colliding() or raycast_jump_finish_left.is_colliding()):
+			idle = true
+			is_climbing = false
+		else:
+			is_climbing_down = false
+			is_climbing_stopped = true
+			is_climbing_up = false
 	elif Input.is_action_just_pressed("dash") and !can_swim:
 		can_dash_attack = false
 		dash = true
 	elif Input.is_action_just_pressed("wall_slide") and is_on_floor():
 		slide = true
+		if not raycast_ceiling_check.is_colliding() or crouch:
+			crouch = false
 	elif Input.is_action_just_pressed("attack") and dash:
 		can_dash_attack = true
-	elif direction.x == 0 and is_on_floor() and !can_swim:
+	elif Input.is_action_just_pressed("crouch") and (idle or crouch):
+		if not crouch:
+			idle = false
+			crouch = true
+		else:
+			idle = true
+			crouch = false
+	elif raycast_ceiling_check.is_colliding():
+		if slide:
+			crouch = false
+		else:
+			crouch = true
+		idle = false
+		running = false
+	elif direction.x == 0 and is_on_floor() and !can_swim and not crouch:
 		current_jump_count = 0
 		idle = true
+		crouch = false
 		running = false
+		is_climbing = false
+		is_climbing_up = false
+		is_climbing_down = false
+		is_climbing_stopped = false
 		jump_starter = false
 		jump_finisher = false
 		player_fell = false
@@ -163,6 +236,11 @@ func state_switch():
 		current_jump_count = 0
 		idle = false
 		running = true
+		crouch = false
+		is_climbing = false
+		is_climbing_up = false
+		is_climbing_down = false
+		is_climbing_stopped = false
 		jump_starter = false
 		jump_finisher = false
 		player_fell = false
@@ -177,6 +255,11 @@ func state_switch():
 				position.y -= 0.75
 		idle = false
 		running = false
+		crouch = false
+		is_climbing = false
+		is_climbing_up = false
+		is_climbing_down = false
+		is_climbing_stopped = false
 		jump_starter = false
 		jump_starter = false
 		jump_finisher = false
@@ -185,12 +268,16 @@ func state_switch():
 		current_jump_count += 1
 		idle = false
 		running = false
+		crouch = false
+		is_climbing = false
+		is_climbing_up = false
+		is_climbing_down = false
+		is_climbing_stopped = false
 		jump_starter = true
 		jump_finisher = false
 		player_fell = false
 		can_swim = false
 	elif (raycast_jump_finish_right.is_colliding() or raycast_jump_finish_left.is_colliding()) and velocity.y > 0 and not is_on_floor():
-		print("jump ended")
 		if Input.is_action_just_pressed("jump") and current_jump_count == 0:
 			can_air_jump = true
 			velocity.y = double_jump_power
@@ -199,12 +286,20 @@ func state_switch():
 		jump_starter = false
 		jump_finisher = true
 		player_fell = false
+		is_climbing = false
+		is_climbing_up = false
+		is_climbing_down = false
+		is_climbing_stopped = false
 	elif velocity.y > 0:
 		idle = false
 		running = false
 		jump_starter = false
 		jump_finisher = false
 		player_fell = true
+		is_climbing = false
+		is_climbing_up = false
+		is_climbing_down = false
+		is_climbing_stopped = false
 
 func reset_air_jump():
 	can_air_jump = false
@@ -249,8 +344,8 @@ func check_wall_cling():
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemies"):
-		#var damage_dealt = 30 if state_machine.
-		body.take_damage(player_damage)
+		var damage_dealt = dash_attack_damage if can_dash_attack else player_damage
+		body.take_damage(damage_dealt)
 
 func heal(healing_amount):
 	heal_effect_player.play("Heal_Timer")

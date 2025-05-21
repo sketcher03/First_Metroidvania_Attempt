@@ -13,7 +13,9 @@ func enter():
 
 func transition():
 	if can_transition:
-		if owner.can_attack:
+		if owner.player_fell:
+			get_parent().change_state("Fall State")
+		elif owner.can_attack:
 			get_parent().change_state("Attack State")
 		elif owner.jump_finisher:
 			get_parent().change_state("Jump End State")

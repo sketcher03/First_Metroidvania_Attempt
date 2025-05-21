@@ -16,6 +16,8 @@ func transition():
 		get_parent().change_state("Run State")
 	elif can_transition and owner.dash:
 		get_parent().change_state("Dash State")
+	elif can_transition and owner.slide:
+		get_parent().change_state("Slide State")
 	elif can_transition and owner.jump_starter:
 		get_parent().change_state("Jump Start State")
 	elif can_transition and owner.player_fell:

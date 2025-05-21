@@ -12,7 +12,7 @@ func enter():
 	can_transition = true
 
 func transition():
-	if can_transition and owner.jump_starter:
+	if owner.jump_starter:
 		get_parent().change_state("Jump Start State")
 	elif can_transition and owner.is_on_floor():
 		if owner.running:

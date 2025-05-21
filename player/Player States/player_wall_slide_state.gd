@@ -15,3 +15,5 @@ func transition():
 			get_parent().change_state("Jump Start State")
 		elif owner.is_on_floor():
 			get_parent().change_state("Idle State")
+		elif owner.can_wall_cling:
+			get_parent().change_state("Wall Cling State")

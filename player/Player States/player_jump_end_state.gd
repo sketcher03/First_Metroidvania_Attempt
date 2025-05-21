@@ -18,6 +18,8 @@ func transition():
 			get_parent().change_state("Fall State")
 		elif owner.running:
 			get_parent().change_state("Run State")
+		elif owner.slide:
+			get_parent().change_state("Slide State")
 		elif owner.can_swim:
 			get_parent().change_state("Swim State")
 		elif owner.is_edge_grabbing:

@@ -14,7 +14,9 @@ func enter():
 
 func transition():
 	if can_transition:
-		if owner.can_attack:
+		if owner.player_fell:
+			get_parent().change_state("Fall State")
+		elif owner.can_attack:
 			get_parent().change_state("Attack State")
 		elif owner.jump_finisher:
 			get_parent().change_state("Jump End State")
@@ -24,3 +26,5 @@ func transition():
 			get_parent().change_state("Edge Grab State")
 		elif owner.can_wall_cling:
 			get_parent().change_state("Wall Cling State")
+		elif owner.can_swim and not owner.can_water_jump:
+			get_parent().change_state("Swim State")

@@ -577,3 +577,4 @@ limit_bottom = 48
 script = ExtResource("7_maq6b")
 player = NodePath("../Warrior")
 smoothing_enabled = true
+smoothing_distance = 3

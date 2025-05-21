@@ -27,6 +27,7 @@ const MAX_HEALTH = 100
 var idle: bool = false
 var running: bool = false
 var dash: bool = false
+var slide: bool = false
 var can_dash_attack: bool = false
 var jump_starter: bool = false
 var jump_finisher: bool = false
@@ -36,7 +37,7 @@ var can_combo_attack: bool = false
 var can_air_jump: bool = false
 var is_dead: bool = false
 var can_swim: bool = false
-var can_water_jump: bool = false
+var can_water_jump: bool = true
 var is_edge_grabbing: bool = false
 var can_wall_cling: bool = false
 var can_wall_slide: bool = false
@@ -47,10 +48,17 @@ func _physics_process(delta: float) -> void:
 	
 	check_edge_grab()
 	check_wall_cling()
-	check_wall_slide(delta)
+	check_wall_slide()
+	
+	# print("Swim: ", can_swim, ", Idle: ", idle, ", Running: ", running)
 	
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		if is_edge_grabbing or can_wall_cling:
+			velocity = Vector2.ZERO
+		if can_wall_slide:
+			velocity.y = 100.0
+		else:
+			velocity += get_gravity() * delta
 	
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or is_edge_grabbing or can_wall_cling or can_wall_slide):
 		is_edge_grabbing = false
@@ -59,38 +67,45 @@ func _physics_process(delta: float) -> void:
 		velocity.y = jump_power
 	
 	if is_edge_grabbing or can_wall_cling:
-		if not can_wall_slide:
-			return
-		else:
-			velocity.y = 75.0
+		var can_fall = raycast_jump_finish_left.is_colliding() or raycast_jump_finish_right.is_colliding()
+		
+		if can_fall:
+			is_edge_grabbing = false
+			can_wall_cling = false
+			if can_wall_slide:
+				can_wall_slide = false
+			player_fell = true
 	
 	direction = Vector2(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), 0)
 	
-	if direction.x != 0 and state_machine.check_if_can_move() and !can_swim:
-		if dash:
-			if not can_dash_attack:
-				velocity.x = direction.x * dash_speed
+	if not can_wall_slide and not can_wall_cling and not is_edge_grabbing:
+		if direction.x != 0 and state_machine.check_if_can_move() and not can_swim:
+			if dash or slide:
+				if not can_dash_attack:
+					velocity.x = direction.x * dash_speed
+				else:
+					velocity.x = move_toward(velocity.x, 0, dash_speed)
 			else:
-				velocity.x = move_toward(velocity.x, 0, dash_speed)
+				velocity.x = direction.x * running_speed
+		elif can_swim and not can_water_jump:
+			velocity.x = direction.x * swimming_speed
+			velocity.y = velocity.y * 0.5
 		else:
-			velocity.x = direction.x * running_speed
-	elif can_swim:
-		velocity.x = direction.x * swimming_speed
-		velocity.y = velocity.y * 0.5
-	else:
-		if dash:
-			var dash_direction = -1 if sprite_2d.flip_h else 1
-			if not can_dash_attack:
-				velocity.x = dash_direction * dash_speed
+			if dash or slide:
+				var dash_direction = -1 if sprite_2d.flip_h else 1
+				if not can_dash_attack:
+					velocity.x = dash_direction * dash_speed
+				else:
+					velocity.x = move_toward(velocity.x, 0, dash_speed)
 			else:
-				velocity.x = move_toward(velocity.x, 0, dash_speed)
-		else:
-			velocity.x = move_toward(velocity.x, 0, running_speed)
+				velocity.x = move_toward(velocity.x, 0, running_speed)
 	
 	# print("Edge Grab: ", is_edge_grabbing)
 	
-	move_and_slide()
-	player_position_check()
+	if not is_edge_grabbing and not can_wall_cling:
+		move_and_slide()
+	if not can_wall_slide and not is_edge_grabbing and not can_wall_cling:
+		player_position_check()
 	state_switch()
 	Global.update_player_position(global_position)
 
@@ -107,9 +122,21 @@ func player_position_check():
 		sprite_2d.position.x = -5
 		raycast_grab_check.target_position.x = -15
 		raycast_grab_hand.target_position.x = -15
+	else:
+		if sprite_2d.flip_h:
+			sprite_2d.position.x = -5
+		else:
+			sprite_2d.position.x = 5
 
 func state_switch():
-	if Input.is_action_just_pressed("jump") and state_machine.check_can_air_jump() and current_jump_count <= 2:
+	if velocity.y > 0 and not raycast_jump_finish_right.is_colliding() and not raycast_jump_finish_left.is_colliding() and not can_swim:
+		idle = false
+		running = false
+		jump_starter = false
+		jump_finisher = false
+		can_air_jump = false
+		player_fell = true
+	elif Input.is_action_just_pressed("jump") and state_machine.check_can_air_jump() and current_jump_count <= 2:
 		can_air_jump = true
 		velocity.y = double_jump_power
 		current_jump_count += 1
@@ -120,6 +147,8 @@ func state_switch():
 	elif Input.is_action_just_pressed("dash") and !can_swim:
 		can_dash_attack = false
 		dash = true
+	elif Input.is_action_just_pressed("wall_slide") and is_on_floor():
+		slide = true
 	elif Input.is_action_just_pressed("attack") and dash:
 		can_dash_attack = true
 	elif direction.x == 0 and is_on_floor() and !can_swim:
@@ -129,6 +158,7 @@ func state_switch():
 		jump_starter = false
 		jump_finisher = false
 		player_fell = false
+		can_wall_slide = false
 	elif direction.x != 0 and is_on_floor() and !can_swim:
 		current_jump_count = 0
 		idle = false
@@ -136,6 +166,7 @@ func state_switch():
 		jump_starter = false
 		jump_finisher = false
 		player_fell = false
+		can_wall_slide = false
 	elif can_swim:
 		if Input.is_action_pressed("jump"):
 			if can_water_jump and current_jump_count <= 1:
@@ -159,7 +190,7 @@ func state_switch():
 		player_fell = false
 		can_swim = false
 	elif (raycast_jump_finish_right.is_colliding() or raycast_jump_finish_left.is_colliding()) and velocity.y > 0 and not is_on_floor():
-		# print("jump ended")
+		print("jump ended")
 		if Input.is_action_just_pressed("jump") and current_jump_count == 0:
 			can_air_jump = true
 			velocity.y = double_jump_power
@@ -179,39 +210,41 @@ func reset_air_jump():
 	can_air_jump = false
 
 func check_edge_grab():
-	print("Player Sprite Position x: ", sprite_2d.position.x)
+	# print("Player Sprite Position x: ", sprite_2d.position.x)
 	var check_hand = not raycast_grab_hand.is_colliding()
 	var check_grab_height = raycast_grab_check.is_colliding()
 	
 	if is_edge_grabbing:
 		if sprite_2d.flip_h:
-			sprite_2d.position.x = -9
+			sprite_2d.position.x = -8
 		else:
-			sprite_2d.position.x = 11
+			sprite_2d.position.x = 12
 	
 	if velocity.y >= 0 and check_hand and check_grab_height and not is_edge_grabbing and is_on_wall_only() and not can_swim and not is_on_floor():
 		is_edge_grabbing = true
 
-func check_wall_slide(delta: float):
-	print("Wall Slide: ", can_wall_slide)
+func check_wall_slide():
 	if can_wall_cling:
 		if Input.is_action_pressed("wall_slide") and is_on_wall_only() and not is_on_floor():
+			can_wall_cling = false
 			can_wall_slide = true
-			# velocity.y = velocity.y * 0.2
-			# animation_player.play("Wall_Slide")
 
 func check_wall_cling():
 	var check_hand = raycast_grab_hand.is_colliding()
 	var check_grab_height = raycast_grab_check.is_colliding()
 	
-	if sprite_2d.flip_h:
-		sprite_2d.flip_h = true
-		sprite_2d.position.x = -10
-	else:
-		sprite_2d.flip_h = false
-		sprite_2d.position.x = 11
+	if can_wall_cling or can_wall_slide:
+		if sprite_2d.flip_h:
+			sprite_2d.flip_h = true
+			sprite_2d.position.x = -11
+		else:
+			sprite_2d.flip_h = false
+			sprite_2d.position.x = 11
 	
+	# print("1: ", velocity.y >= 0, " 2: ", check_grab_height, " 3: ", check_hand, " 4: ", is_on_wall_only(), " 5: ", Input.is_action_pressed("wall_cling"), " 6: ", !can_wall_cling)
 	if velocity.y >= 0 and check_grab_height and check_hand and is_on_wall_only() and Input.is_action_pressed("wall_cling") and not can_wall_cling:
+		print("here")
+		can_wall_slide = false
 		can_wall_cling = true
 
 func _on_attack_area_body_entered(body: Node2D) -> void:

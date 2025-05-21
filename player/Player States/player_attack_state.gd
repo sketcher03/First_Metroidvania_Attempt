@@ -27,3 +27,5 @@ func transition():
 			get_parent().change_state("Jump End State")
 		elif owner.is_edge_grabbing:
 			get_parent().change_state("Edge Grab State")
+		elif owner.can_swim and not owner.can_water_jump:
+			get_parent().change_state("Swim State")

@@ -571,7 +571,6 @@ position = Vector2(72, -60)
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
 position = Vector2(72, -60)
-zoom = Vector2(1.5, 1.5)
 limit_left = -48
 limit_bottom = 48
 script = ExtResource("7_maq6b")

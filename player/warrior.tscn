@@ -245,7 +245,7 @@ tracks/9/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(6, -8)]
+"values": [Vector2(5, -8)]
 }
 tracks/10/type = "value"
 tracks/10/imported = false
@@ -257,7 +257,7 @@ tracks/10/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-12, -8)]
+"values": [Vector2(-11, -8)]
 }
 
 [sub_resource type="Animation" id="Animation_12708"]
@@ -323,7 +323,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(6, -8)]
+"values": [Vector2(5, -8)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -335,7 +335,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-10, -8)]
+"values": [Vector2(-9, -8)]
 }
 
 [sub_resource type="Animation" id="Animation_p5fu8"]
@@ -376,7 +376,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.266667),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(9, -8), Vector2(9, -8), Vector2(7, -8)]
+"values": [Vector2(8, -8), Vector2(8, -8), Vector2(7, -8)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -388,7 +388,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.266667),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(-9, -8), Vector2(-9, -8), Vector2(-11, -8)]
+"values": [Vector2(-8, -8), Vector2(-8, -8), Vector2(-11, -8)]
 }
 
 [sub_resource type="Animation" id="Animation_kyvjc"]
@@ -513,7 +513,7 @@ tracks/9/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(6, -8)]
+"values": [Vector2(5, -8)]
 }
 tracks/10/type = "value"
 tracks/10/imported = false
@@ -525,7 +525,7 @@ tracks/10/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-12, -8)]
+"values": [Vector2(-11, -8)]
 }
 
 [sub_resource type="Animation" id="Animation_fjbj0"]
@@ -604,7 +604,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.333333, 0.666667),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(6, -8), Vector2(0, -8), Vector2(1, -8)]
+"values": [Vector2(5, -8), Vector2(0, -8), Vector2(0, -8)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -616,7 +616,7 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0, 0.333333, 0.666667),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(-12, -8), Vector2(-18, -8), Vector2(-15, -8)]
+"values": [Vector2(-11, -8), Vector2(-18, -8), Vector2(-14, -8)]
 }
 
 [sub_resource type="Animation" id="Animation_l2ptc"]
@@ -645,7 +645,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.0833333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-9, -13), Vector2(-8, -8)]
+"values": [Vector2(-7, -13), Vector2(-7, -8)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -657,7 +657,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.0833333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(7, -13), Vector2(8, -8)]
+"values": [Vector2(7, -13), Vector2(7, -8)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -759,7 +759,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(8, -8)]
+"values": [Vector2(7, -8)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -771,7 +771,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-8, -8)]
+"values": [Vector2(-7, -8)]
 }
 
 [sub_resource type="Animation" id="Animation_auklf"]
@@ -837,7 +837,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(10, -8)]
+"values": [Vector2(9, -8)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -914,7 +914,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(12, -8)]
+"values": [Vector2(11, -8)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -926,7 +926,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-6, -8)]
+"values": [Vector2(-5, -8)]
 }
 
 [sub_resource type="Animation" id="Animation_b3m8a"]
@@ -992,7 +992,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(9, -8)]
+"values": [Vector2(8, -8)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -1004,7 +1004,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-9, -8)]
+"values": [Vector2(-8, -8)]
 }
 
 [sub_resource type="Animation" id="Animation_uql5f"]
@@ -1069,7 +1069,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(8, -8)]
+"values": [Vector2(7, -8)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -1081,7 +1081,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-8, -8)]
+"values": [Vector2(-7, -8)]
 }
 
 [sub_resource type="Animation" id="Animation_ns54s"]
@@ -1147,7 +1147,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-8, -8)]
+"values": [Vector2(-7, -8)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -1159,7 +1159,133 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(8, -8)]
+"values": [Vector2(7, -8)]
+}
+
+[sub_resource type="Animation" id="Animation_vyb5c"]
+resource_name = "Ladder_Climb_Down"
+length = 0.80001
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("96_ft0ps"), ExtResource("95_m75yd"), ExtResource("94_0yiqb"), ExtResource("93_wkt3g"), ExtResource("92_uuano"), ExtResource("91_bjdmm"), ExtResource("90_vyb5c"), ExtResource("89_jpnsm")]
+}
+
+[sub_resource type="Animation" id="Animation_jpnsm"]
+resource_name = "Ladder_Climb_Up"
+length = 0.80001
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("89_jpnsm"), ExtResource("90_vyb5c"), ExtResource("91_bjdmm"), ExtResource("92_uuano"), ExtResource("93_wkt3g"), ExtResource("94_0yiqb"), ExtResource("95_m75yd"), ExtResource("96_ft0ps")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:shape:radius")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [8.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:shape:height")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [34.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -20)]
+}
+
+[sub_resource type="Animation" id="Animation_y6equ"]
+resource_name = "Ladder_Grab"
+length = 0.10001
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("91_bjdmm")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -20)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:shape:radius")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [8.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape2D:shape:height")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [34.0]
 }
 
 [sub_resource type="Animation" id="Animation_1ccis"]
@@ -1360,7 +1486,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-11, -8)]
+"values": [Vector2(-10, -8)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -1372,7 +1498,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(9, -8)]
+"values": [Vector2(8, -8)]
 }
 
 [sub_resource type="Animation" id="Animation_ahl6x"]
@@ -1434,10 +1560,10 @@ tracks/4/path = NodePath("RayCasts/raycast_jump_finish_right:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.333334, 0.416667),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.166667, 0.25, 0.333333, 0.416667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(5, -8), Vector2(5, -8), Vector2(7, -8), Vector2(6, -8)]
+"values": [Vector2(4, -8), Vector2(3.66667, -8), Vector2(4, -8), Vector2(6.00001, -8), Vector2(5, -8)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -1446,10 +1572,10 @@ tracks/5/path = NodePath("RayCasts/raycast_jump_finish_left:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.166666, 0.25, 0.333333),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.166667, 0.25, 0.333333, 0.416667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(-11, -8), Vector2(-11, -8), Vector2(-9, -8), Vector2(-10, -8)]
+"values": [Vector2(-10, -8), Vector2(-9.99998, -8), Vector2(-10, -8), Vector2(-8, -8), Vector2(-9, -8)]
 }
 
 [sub_resource type="Animation" id="Animation_esh0s"]
@@ -1515,7 +1641,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(8, -8)]
+"values": [Vector2(7, -8)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -1527,7 +1653,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-8, -8)]
+"values": [Vector2(-7, -8)]
 }
 
 [sub_resource type="Animation" id="Animation_b53dl"]
@@ -1593,7 +1719,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(8, -8)]
+"values": [Vector2(7, -8)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -1605,133 +1731,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-8, -8)]
-}
-
-[sub_resource type="Animation" id="Animation_y6equ"]
-resource_name = "Ladder_Grab"
-length = 0.10001
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("91_bjdmm")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionShape2D:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -20)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CollisionShape2D:shape:radius")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [8.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("CollisionShape2D:shape:height")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [34.0]
-}
-
-[sub_resource type="Animation" id="Animation_jpnsm"]
-resource_name = "Ladder_Climb_Up"
-length = 0.80001
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [ExtResource("89_jpnsm"), ExtResource("90_vyb5c"), ExtResource("91_bjdmm"), ExtResource("92_uuano"), ExtResource("93_wkt3g"), ExtResource("94_0yiqb"), ExtResource("95_m75yd"), ExtResource("96_ft0ps")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionShape2D:shape:radius")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [8.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CollisionShape2D:shape:height")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [34.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("CollisionShape2D:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -20)]
-}
-
-[sub_resource type="Animation" id="Animation_vyb5c"]
-resource_name = "Ladder_Climb_Down"
-length = 0.80001
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [ExtResource("96_ft0ps"), ExtResource("95_m75yd"), ExtResource("94_0yiqb"), ExtResource("93_wkt3g"), ExtResource("92_uuano"), ExtResource("91_bjdmm"), ExtResource("90_vyb5c"), ExtResource("89_jpnsm")]
+"values": [Vector2(-7, -8)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kyvjc"]
@@ -1879,10 +1879,10 @@ target_position = Vector2(15, 0)
 
 [node name="raycast_ceiling_check" type="RayCast2D" parent="RayCasts"]
 position = Vector2(-1, -17)
-target_position = Vector2(0, -30)
+target_position = Vector2(0, -17)
 
 [node name="raycast_ladder_check" type="RayCast2D" parent="RayCasts"]
-target_position = Vector2(0, -40)
+target_position = Vector2(0, -34)
 collision_mask = 256
 hit_from_inside = true
 
@@ -1899,6 +1899,7 @@ script = ExtResource("48_dw51i")
 [node name="Attack State" type="Node2D" parent="StateMachine"]
 script = ExtResource("49_uwmfe")
 can_move = false
+can_air_jump = true
 
 [node name="Jump Start State" type="Node2D" parent="StateMachine"]
 script = ExtResource("50_5ej7l")
@@ -1906,6 +1907,7 @@ can_air_jump = true
 
 [node name="Jump End State" type="Node2D" parent="StateMachine"]
 script = ExtResource("51_7i1nj")
+can_air_jump = true
 
 [node name="Air Jump State" type="Node2D" parent="StateMachine"]
 script = ExtResource("52_auklf")
@@ -1926,6 +1928,7 @@ script = ExtResource("65_i86xs")
 
 [node name="Dash State" type="Node2D" parent="StateMachine"]
 script = ExtResource("73_7iuao")
+can_air_jump = true
 
 [node name="Dash Attack State" type="Node2D" parent="StateMachine"]
 script = ExtResource("84_5soi3")

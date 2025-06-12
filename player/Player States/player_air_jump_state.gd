@@ -21,7 +21,7 @@ func transition():
 		elif owner.jump_finisher:
 			get_parent().change_state("Jump End State")
 		elif owner.is_on_floor():
-			get_parent().change_state("Jump End State")
+			get_parent().change_state("Idle State")
 		elif owner.is_edge_grabbing:
 			get_parent().change_state("Edge Grab State")
 		elif owner.can_wall_cling:

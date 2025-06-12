@@ -15,3 +15,5 @@ func transition():
 			get_parent().change_state("Jump Start State")
 		elif owner.can_wall_slide:
 			get_parent().change_state("Wall Slide State")
+		elif owner.jump_finisher:
+			get_parent().change_state("Jump End State")

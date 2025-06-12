@@ -11,4 +11,4 @@ func enter():
 	animation_player.play("Death")
 	await animation_player.animation_finished
 	is_dead = true
-	get_tree().reload_current_scene()
+	Global.reload_after_death()

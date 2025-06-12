@@ -27,6 +27,7 @@ extends CharacterBody2D
 
 var direction: Vector2 = Vector2.ZERO
 const MAX_HEALTH = 100
+const AFTER_DEATH_HEALTH = 60
 
 # State switching helper variables
 var idle: bool = false
@@ -60,7 +61,11 @@ func _physics_process(delta: float) -> void:
 	check_wall_cling()
 	check_wall_slide()
 	
-	print("Direction: ", direction, " Stop: ", is_climbing_stopped, " Up: ", is_climbing_up, " Down: ", is_climbing_down)
+	print("Direction.X: ", direction.x)
+	
+	if Global.after_death:
+		Global.update_player_coin(0)
+		Global.update_player_health(AFTER_DEATH_HEALTH, MAX_HEALTH)
 	
 	if not is_on_floor() and not is_climbing:
 		if is_edge_grabbing or can_wall_cling:
@@ -83,15 +88,16 @@ func _physics_process(delta: float) -> void:
 		is_climbing = false
 		velocity.y = jump_power
 	
-	if is_edge_grabbing or can_wall_cling:
-		var can_fall = raycast_jump_finish_left.is_colliding() or raycast_jump_finish_right.is_colliding()
-		
-		if can_fall:
-			is_edge_grabbing = false
-			can_wall_cling = false
-			if can_wall_slide:
-				can_wall_slide = false
-			player_fell = true
+	#if is_edge_grabbing or can_wall_cling:
+		#var can_fall = raycast_jump_finish_left.is_colliding() or raycast_jump_finish_right.is_colliding()
+		#
+		#if can_fall:
+			# print("fall activated")
+			#is_edge_grabbing = false
+			#can_wall_cling = false
+			#if can_wall_slide:
+				#can_wall_slide = false
+			#player_fell = true
 	
 	direction = Vector2(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), 0)
 	direction.y = Input.get_action_strength("wall_slide") - Input.get_action_strength("wall_cling") if is_climbing else 0.0
@@ -128,29 +134,32 @@ func _physics_process(delta: float) -> void:
 	
 	if not is_edge_grabbing and not can_wall_cling:
 		move_and_slide()
-	if not can_wall_slide and not is_edge_grabbing and not can_wall_cling and not is_climbing:
+	if not can_wall_slide and not is_edge_grabbing and not can_wall_cling:
 		player_position_check()
 	state_switch()
 	Global.update_player_position(global_position)
 
 func player_position_check():
-	if direction.x > 0:
-		sprite_2d.flip_h = false
-		attack_area.scale.x = 1
-		sprite_2d.position.x = 5
-		raycast_grab_check.target_position.x = 15
-		raycast_grab_hand.target_position.x = 15
-	elif direction.x < 0:
-		sprite_2d.flip_h = true
-		attack_area.scale.x = -1
-		sprite_2d.position.x = -5
-		raycast_grab_check.target_position.x = -15
-		raycast_grab_hand.target_position.x = -15
+	if is_climbing and not is_on_floor():
+		sprite_2d.position.x = 0
 	else:
-		if sprite_2d.flip_h:
-			sprite_2d.position.x = -5
-		else:
+		if direction.x > 0:
+			sprite_2d.flip_h = false
+			attack_area.scale.x = 1
 			sprite_2d.position.x = 5
+			raycast_grab_check.target_position.x = 15
+			raycast_grab_hand.target_position.x = 15
+		elif direction.x < 0:
+			sprite_2d.flip_h = true
+			attack_area.scale.x = -1
+			sprite_2d.position.x = -5
+			raycast_grab_check.target_position.x = -15
+			raycast_grab_hand.target_position.x = -15
+		else:
+			if sprite_2d.flip_h:
+				sprite_2d.position.x = -5
+			else:
+				sprite_2d.position.x = 5
 
 func state_switch():
 	var ladderCollider = raycast_ladder_check.get_collider()
@@ -171,7 +180,7 @@ func state_switch():
 	elif Input.is_action_just_pressed("attack") and !dash:
 		can_attack = true
 		crouch = false
-	elif ladderCollider and (Input.is_action_pressed("wall_cling") or Input.is_action_pressed("wall_slide")) and !is_climbing:
+	elif ladderCollider and (Input.is_action_pressed("wall_cling") or Input.is_action_pressed("wall_slide")) and not running and not is_climbing and not jump_starter and not jump_finisher and not can_air_jump and not player_fell:
 		slide = false
 		idle = false
 		running = false
@@ -181,7 +190,7 @@ func state_switch():
 		player_fell = false
 		is_climbing = true
 	elif ladderCollider and is_climbing:
-		if direction.y > 0:
+		if direction.y > 0 and not is_on_floor():
 			is_climbing_down = true
 			is_climbing_stopped = false
 			is_climbing_up = false
@@ -189,7 +198,7 @@ func state_switch():
 			is_climbing_down = false
 			is_climbing_stopped = false
 			is_climbing_up = true
-		elif is_on_floor() and (raycast_jump_finish_right.is_colliding() or raycast_jump_finish_left.is_colliding()):
+		elif is_on_floor():
 			idle = true
 			is_climbing = false
 		else:
@@ -212,13 +221,13 @@ func state_switch():
 		else:
 			idle = true
 			crouch = false
-	elif raycast_ceiling_check.is_colliding():
+	elif raycast_ceiling_check.is_colliding() and velocity.y >= 0:
 		if slide:
 			crouch = false
-		else:
+		elif not (jump_finisher or jump_starter or player_fell):
 			crouch = true
-		idle = false
-		running = false
+			idle = false
+			running = false
 	elif direction.x == 0 and is_on_floor() and !can_swim and not crouch:
 		current_jump_count = 0
 		idle = true
@@ -261,7 +270,6 @@ func state_switch():
 		is_climbing_down = false
 		is_climbing_stopped = false
 		jump_starter = false
-		jump_starter = false
 		jump_finisher = false
 		player_fell = false
 	elif Input.is_action_just_pressed("jump") and velocity.y <= 0:
@@ -290,6 +298,7 @@ func state_switch():
 		is_climbing_up = false
 		is_climbing_down = false
 		is_climbing_stopped = false
+		# can_wall_cling = false
 	elif velocity.y > 0:
 		idle = false
 		running = false
@@ -305,6 +314,9 @@ func reset_air_jump():
 	can_air_jump = false
 
 func check_edge_grab():
+	if can_swim:
+		return
+	
 	# print("Player Sprite Position x: ", sprite_2d.position.x)
 	var check_hand = not raycast_grab_hand.is_colliding()
 	var check_grab_height = raycast_grab_check.is_colliding()
@@ -319,12 +331,18 @@ func check_edge_grab():
 		is_edge_grabbing = true
 
 func check_wall_slide():
+	if can_swim:
+		return
+		
 	if can_wall_cling:
 		if Input.is_action_pressed("wall_slide") and is_on_wall_only() and not is_on_floor():
 			can_wall_cling = false
 			can_wall_slide = true
 
 func check_wall_cling():
+	if can_swim:
+		return
+		
 	var check_hand = raycast_grab_hand.is_colliding()
 	var check_grab_height = raycast_grab_check.is_colliding()
 	
@@ -337,8 +355,7 @@ func check_wall_cling():
 			sprite_2d.position.x = 11
 	
 	# print("1: ", velocity.y >= 0, " 2: ", check_grab_height, " 3: ", check_hand, " 4: ", is_on_wall_only(), " 5: ", Input.is_action_pressed("wall_cling"), " 6: ", !can_wall_cling)
-	if velocity.y >= 0 and check_grab_height and check_hand and is_on_wall_only() and Input.is_action_pressed("wall_cling") and not can_wall_cling:
-		print("here")
+	if velocity.y >= 0 and check_grab_height and check_hand and is_on_wall_only() and Input.is_action_pressed("wall_cling") and not can_wall_cling and not jump_finisher:
 		can_wall_slide = false
 		can_wall_cling = true
 
